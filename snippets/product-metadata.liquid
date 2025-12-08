@@ -1,0 +1,16 @@
+<script type="text/javascript">
+
+    var metadata = {};
+
+    var infoTitle = "{{ product.metafields.images_info.title }}"
+    {% for variant in product.variants %}
+        metadata[{{variant.id}}] = {
+            "images_info":"{{ variant.metafields.images_info.info }}", 
+            "images_title":infoTitle,
+            "price_info":"{{ variant.metafields.servings.servings }}",
+            "price_dev":"{{ variant.metafields.serving.serving }}",
+            "price_dev2":"{{ variant.metafields.serving.serving2 }}"
+        };
+    {% endfor %}
+
+</script> 

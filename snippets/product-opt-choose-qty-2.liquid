@@ -1,0 +1,54 @@
+{% if option_name contains '|' %}
+{% assign worlds = option_name | split: '|' %}
+{% for word in worlds %}
+    {% if forloop.index == 1 %}
+    {% assign option_name = word %}
+    {% else %}
+    {% assign option_name = option_name | append: '|<span class="pink">' | append: word | append: '</span>'%}
+    {% endif %}
+{% endfor %}
+{% endif %}
+<label class="single-option-radio__label dev-qty"
+for="ProductSelect-option-{{ forloop.index0 }}">
+{{ option_name | remove: 'Choose '| remove: ' |'}}
+</label>
+{% if section.settings.product_selector == 'radio' %}
+    <fieldset class="single-option-radio"
+        id="ProductSelect-option-{{ forloop.index0 }}">
+        {% assign option_index = forloop.index %}
+        {% for value in option.values %}
+        {% assign variant_label_state = true %}
+        {% if product.options.size == 1 %}
+            {% unless product.variants[forloop.index0].available  %}
+            {% assign variant_label_state = false %}
+            {% endunless %}
+        {% endif %}
+
+              {% assign new_qty = value | divided_by: 30 %}
+              <input type="radio" 
+                  {% if option.selected_value == value %} checked="checked"{% endif %}
+                  {% unless variant_label_state %} disabled="disabled"{% endunless %}
+                  value="{{ value | escape }}"
+                  data-jar="{{ new_qty }}"
+                  data-index="option{{ option_index }}"
+                  data-option="{{ value | escape  }}"
+                  name="option{{ option.position }}"
+                  class="custom-radio-button class--{{value | escape}} single-option-selector__radio{% unless variant_label_state %} disabled{% endunless %} "
+                  id="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}">
+              <label for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}" 
+                  data-option="{{ value | escape  }}" 
+                  class="text-center {% if option_name contains 'Fills' %} Fills {% endif %}">
+                  <div class="option-qty option-default">{{ value }}</div>
+                  {% comment %} <div class="option-price"></div>        {% endcomment %}
+              </label>
+        {% endfor %}
+    </fieldset>
+{% else %}
+    <select class="single-option-selector__radio single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+        {% for value in option.values %}
+        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value | escape }}</option>
+        {% endfor %}
+    </select>
+{% endif %}
+
+<input type="hidden" id="baseUrl" value="{{product.template_suffix}}" />

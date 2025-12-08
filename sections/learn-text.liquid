@@ -1,0 +1,31 @@
+<h1><img src="//cdn.shopify.com/s/files/1/0091/8444/4495/files/Asset_1_large.png?v=1584484607">{{section.settings.title}} <span class="pink-text">{{section.settings.title_span}}</span></h1>
+<p style="text-align: center">{{section.settings.text}}</p>
+{% schema %}
+  {
+    "name": "Learn Text",
+    "settings": [
+		{	
+			"type":"text",
+			"id":"title",
+			"label":"Title"
+		},
+		{	
+			"type":"text",
+			"id":"title_span",
+			"label":"Title highlight"
+		},
+		{
+			"type":"text",
+			"id":"text",
+			"label":"text"
+		}
+
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

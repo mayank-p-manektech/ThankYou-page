@@ -1,0 +1,28 @@
+{% assign default_variant_id = product.first_available_variant.id %}
+
+{% if product.metafields.default_variant.default_variant %}
+    {% assign default_variant_index = product.metafields.default_variant.default_variant %}  
+    {% for variant in product.variants %}
+        {% if forloop.index == default_variant_index %}
+            {% if variant.available %}
+                {% assign default_variant_id = variant.id %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<div class="dev-hide-mobile">
+  <div class="star-review">
+        <img src="https://cdn.shopify.com/s/files/1/0091/8444/4495/files/star-pic.png?v=1712962883" height="" width="" alt="" />       
+        </div>
+  <!-- <div><span class="spr-starrating spr-badge-starrating"><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i></span></div> -->
+        
+      <div>{{ product.metafields.images_info.text }}</div> 
+      <div style="color: #000;" class="product-images-info-title">{{ product.metafields.images_info.title }}</div> 
+      <!-- <div class="product-image-info-wrapper div-hide-mobile">
+        <div class="star-review">
+        <img src="https://cdn.shopify.com/s/files/1/0091/8444/4495/files/star-pic.png?v=1712962883" height="" width="" alt="" />       
+        </div>    
+        <div class="image-info">I've tried almost every rose spray on the market. Nothing comes even close to Pure Rose Mist! The refill concept is brilliant! I save money, and I feel great for not creating waste.</div>
+        <div class="author">-  Ashley</div>             
+      </div> -->
+</div>

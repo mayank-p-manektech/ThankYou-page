@@ -1,0 +1,245 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "template": {
+      "type": "product-template-yumies",
+      "blocks": {
+        "reviews_tLfA4K": {
+          "type": "reviews",
+          "settings": {
+            "reviews-text": "7,490 reviews"
+          }
+        },
+        "description_ELEBmt": {
+          "type": "description",
+          "settings": {}
+        },
+        "price_qfYVMe": {
+          "type": "price",
+          "settings": {}
+        },
+        "price_per_unit_GhyqAg": {
+          "type": "price-per-unit",
+          "settings": {}
+        },
+        "video_carousel_JFcQCb": {
+          "type": "video-carousel",
+          "settings": {}
+        },
+        "accordion_8aPzca": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "Benefits",
+            "accordion-content": "<ul><li>Elevate your mood</li><li>Calms your mind</li><li>Raise your vibrations</li><li>Promote overall health</li><li>Fight free-radical damage</li><li>Soothe digestion</li><li>Reduce inflammation</li></ul>"
+          }
+        },
+        "accordion_fyT8Vp": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "Taste",
+            "accordion-content": "<p>With a delicious tangy floral taste, our vegan Rose Yummies will utterly delight your senses. Many of our customers consider Rose Yummies to be the best tasting gummies they’ve ever had.</p>"
+          }
+        },
+        "accordion_ADNL8p": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "Ingredients",
+            "accordion-content": "<p>Active ingredients:</p><p>Organic Bulgarian Rose oil. Rose Nectar. Vittamin C.</p><p></p><p></p><p>Other ingredients:</p><p>Water, Agar, Locust Bean Gum, Natural Flavor, Citric Acid, Lactic Acid, Sodium Lactate, Vegetable Juice For Color, Coconut Oil, Carnauba Wax, Xylitol, Sorbitol.</p>"
+          }
+        },
+        "accordion_KpQ4yk": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "How to Use",
+            "accordion-content": "<p>For best results, take 2 or more rose yummies daily</p>"
+          }
+        },
+        "accordion_nMcGDB": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "Story",
+            "accordion-content": "<p>In the 80s, the leader of then-communist Bulgaria was aware of the health benefits of the Bulgarian Rose. Growing up, he watched his parents take every morning a sugar cube with 2-3 drops of rose oil to boost brain health and prevent mental decline. He tasked top Bulgarian scientists to develop an ingestible rose oil product. Skeptical at first, the scientists soon discovered that the oil delivered on its great promise - it not only stimulated brain health, but also boosted heart cardiovascular health and showed potent anti-aging effects. They called it “the fountain of youth”. Shortly after, Bulgaria launched a patented product with incredible results, and became a major export to wealthier nations. Yet, little did they know about vibrations at the time. That product and the scientific research behind it inspired us to create Rose Yummies. After two years of research and development, we are thrilled to introduce to you the only Rose Gummies in the world! Not just healthier, but also tastier than any gummy out there.</p>"
+          }
+        },
+        "recharge_subscriptions_subscription_widget_v2_EegQkG": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {
+            "default_selection": "subscription",
+            "first_selection_option": "onetime",
+            "display_mode": "compact",
+            "brand_color": "#fac8ca",
+            "brand_contrast_color": "#fac8ca",
+            "selected_bg_color": "#fff4f5",
+            "selected_text_color": "#523c31",
+            "text_color": "#523c31",
+            "border_radius": "soft",
+            "subscription_with_discount_label": "Subscribe & Save",
+            "subscription_without_discount_label": "Subscribe",
+            "onetime_label": "One-time",
+            "frequency_label": "",
+            "frequency_display_type": "dropdown",
+            "frequency_display_content": "interval",
+            "badge_text": "",
+            "badge_text_color": "#ffffff",
+            "badge_bg_color": "#0f866a",
+            "benefits": "<ul><li>Change frequency, pause or cancel any time after 2nd month.</li></ul><p><strong>Choose frequency:</strong></p>",
+            "onetime_drawbacks": "",
+            "learn_more_text": "Learn more",
+            "learn_more_content": "<style> rc-learn-more-modal h1 { font-size: 40px; line-height: 48px; font-weight: 600; text-align: center; padding-bottom: 32px; margin: 0;}rc-learn-more-modal h2 { padding: 0; margin: 0; font-size: 20px; line-height: 28px; font-weight: 600;}rc-learn-more-modal p { margin: 0; padding: 0; font-size: 16px; line-height: 24px;}rc-learn-more-modal .learn-more-content { padding: 0 20px 20px;}rc-learn-more-modal .learn-more-footer button { background-color: var(--rc-widget-brand-color); color: var(--rc-widget-brand-contrast-color); border: none; border-radius: var(--rc-widget-button-radius); padding: 12px; min-width: 335px; font-size: 16px; font-weight: 600; line-height: 24px; cursor: pointer; transition: background-color 0.1s ease;}rc-learn-more-modal .learn-more-footer button:hover { background-color: var(--rc-widget-brand-color-80);}rc-learn-more-modal .learn-more-footer { display: flex; justify-content: center;}rc-learn-more-modal .learn-more-group { display: flex; flex-direction: column; gap: 24px; margin-bottom: 24px;}rc-learn-more-modal .learn-more-group-item { display: flex; gap: 32px; align-items: center;}rc-learn-more-modal .learn-more-group-icon-container { display: flex; padding: 32px; background-color: #f6f8f9; border-radius: var(--rc-widget-card-radius);}rc-learn-more-modal svg, rc-learn-more-modal img { height: 40px; width: 40px;}@media (max-width: 560px) { rc-learn-more-modal h1 { font-size: 26px; line-height: 32px; padding-bottom: 16px; }rc-learn-more-modal h2 { font-size: 16px; line-height: 24px;}rc-learn-more-modal p { font-size: 14px; line-height: 20px;}rc-learn-more-modal .learn-more-content { padding: 0;}rc-learn-more-modal svg, rc-learn-more-modal img { height: 32px; width: 32px;}rc-learn-more-modal .learn-more-group-item { gap: 16px;}rc-learn-more-modal .learn-more-group-icon-container { padding: 20px;} }</style><div class=\"learn-more-content\">\n<h1 class=\"learn-more-header\">Great reasons to subscribe</h1> <div class=\"learn-more-group\"> <div class=\"learn-more-group-item\"> <div class=\"learn-more-group-icon-container\"><span rc-calendar-icon=\"\"></span></div> <div> <h2 style=\"margin:0;\">Flexible frequency</h2> <p style=\"margin:0;\"> Not sure how much of something you need, or how often? Adjust quantities and frequencies any time. </p> </div> </div> <div class=\"learn-more-group-item\"> <div class=\"learn-more-group-icon-container\"> <span rc-bell-icon=\"\"></span> </div> <div> <h2>Order reminders</h2> <p> We'll let you know before each shipment. Delay, reschedule or cancel if you need to - we’ll only bill you when your order ships. </p> </div> </div> <div class=\"learn-more-group-item\"> <div class=\"learn-more-group-icon-container\"> <span rc-phone-icon=\"\"></span> </div> <div> <h2>You're in control</h2> <p> Add or remove subscriptions, cancel orders, and edit frequencies and quantities through our user-friendly customer portal. </p> </div> </div> </div>\n</div><div class=\"learn-more-footer\"><button data-dismiss-modal=\"\">Got it</button></div>",
+            "frequency_display_translations": "{\n\t\"days\": \"{interval} days\", \n\t\"day\": \"{interval} day\", \n\t\"weeks\": \"{interval} weeks\", \n\t\"week\": \"{interval} week\", \n\t\"months\": \"{interval} months\", \n\t\"month\": \"{interval} month\", \n\t\"save\":\"\"\n}"
+          }
+        }
+      },
+      "block_order": [
+        "reviews_tLfA4K",
+        "description_ELEBmt",
+        "price_qfYVMe",
+        "price_per_unit_GhyqAg",
+        "video_carousel_JFcQCb",
+        "accordion_8aPzca",
+        "accordion_fyT8Vp",
+        "accordion_ADNL8p",
+        "accordion_KpQ4yk",
+        "accordion_nMcGDB",
+        "recharge_subscriptions_subscription_widget_v2_EegQkG"
+      ],
+      "settings": {
+        "featured_review": true,
+        "featured_review_author": "- Clay R.",
+        "featured_review_text": "I felt calmer and more focused within 5 minutes of eating a rose yummy. Feels so great",
+        "zoom_enable": false,
+        "social_sharing_products": false,
+        "product_vendor_enable": false,
+        "image_layout": "thumbnails",
+        "product_selector": "radio",
+        "enable_payment_button": false,
+        "add_to_cart_button_size": "small",
+        "tab_1": ""
+      }
+    },
+    "image_row_mobile_Ex9kV3": {
+      "type": "image-row-mobile",
+      "settings": {
+        "image": "shopify://shop_images/1109881F-0A4B-42D3-9CDF-70559DAB9CAB-8484-000001FA433EBBA1.jpeg"
+      }
+    },
+    "homepage_icons_bj6BzR": {
+      "type": "homepage-icons",
+      "blocks": {
+        "info_GHyyTG": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p2_200x_a2ca558e-d6d3-4d0a-94c1-838f29a12767.png",
+            "text": "Elevate Your",
+            "subtitle": "Mood"
+          }
+        },
+        "info_KphBB7": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p4.png",
+            "text": "Raise Your",
+            "subtitle": "Vibrations"
+          }
+        },
+        "info_prerhx": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p1.png",
+            "text": "Nourish Your",
+            "subtitle": "Body & Skin"
+          }
+        },
+        "info_w4gkm6": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p3.png",
+            "text": "Boost Your",
+            "subtitle": "Immunity"
+          }
+        }
+      },
+      "block_order": [
+        "info_GHyyTG",
+        "info_KphBB7",
+        "info_prerhx",
+        "info_w4gkm6"
+      ],
+      "settings": {
+        "heading1": "Vibrate Higher",
+        "heading2": "with Every Yummy!",
+        "heading3": ""
+      }
+    },
+    "image_review_sec_PgHVH6": {
+      "type": "image-review-sec",
+      "settings": {
+        "review_image1": "shopify://shop_images/quotation.png",
+        "text": "<p>These are delicious! I’m so glad I discovered them. They really do have a calming effect! I have one in the morning and another before bed. It’s hard not to eat half the container in one sitting though.</p><p>- Sarah B.</p>",
+        "review_image2": "shopify://shop_images/47EE0E87-127A-4250-BB80-15E4DF02E27C-7078-0000019ED6525B99.jpeg"
+      }
+    },
+    "image_text_section_yumies_ewRb9P": {
+      "type": "image-text-section-yumies",
+      "settings": {
+        "full-width": true,
+        "title": "",
+        "subtitle": "",
+        "image_icon": "https://www.drinkpurerose.com/cdn/shop/files/quotation_540x.png?v=1614821344",
+        "text": "",
+        "product_image": "shopify://shop_images/47EE0E87-127A-4250-BB80-15E4DF02E27C-7078-0000019ED6525B99.jpeg",
+        "button_label": "",
+        "button_link": "",
+        "section_class": ""
+      }
+    },
+    "product_testimonials_yumies_FTYB4U": {
+      "type": "product-testimonials-yumies",
+      "disabled": true,
+      "settings": {
+        "product_testimonials_header": "",
+        "product_testimonials_text": "<p>If you want your children to enjoy the healthiest treat around, look no further! With every bite, you can feel you are doing something great for yourself. What an amazing product for my whole family!  </p>",
+        "product_testimonials_author": "- Nicole M."
+      }
+    },
+    "new_testimonial_yummies_mLEpGC": {
+      "type": "new-testimonial-yummies",
+      "settings": {
+        "new-product_testimonials_header": "",
+        "new-product_testimonials_text": "<p>If you want your children to enjoy the healthiest treat around, look no further! With every bite, you can feel you are doing something great for yourself. What an amazing product for my whole family!  </p>",
+        "new-product_testimonials_author": "- Nicole M."
+      }
+    },
+    "1726718285025f093b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_Kqgxke": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_Kqgxke"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "template",
+    "image_row_mobile_Ex9kV3",
+    "homepage_icons_bj6BzR",
+    "image_review_sec_PgHVH6",
+    "image_text_section_yumies_ewRb9P",
+    "product_testimonials_yumies_FTYB4U",
+    "new_testimonial_yummies_mLEpGC",
+    "1726718285025f093b"
+  ]
+}

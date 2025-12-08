@@ -1,0 +1,391 @@
+{% style %}
+            .full-width__overlay-{{ section.id }} .full-width__top-text {
+                color: {{ section.settings.top_text_color }};
+            }
+            .full-width__overlay-{{ section.id }} h3.full-width__title {
+                color: {{ section.settings.title_color }};
+            }
+            .full-width__overlay-{{ section.id }} .full-width__title .js-rotating {
+                color: {{ section.settings.title_color }};
+            }
+            .full-width__overlay-{{ section.id }} .full-width__bottom-text {
+                color: {{ section.settings.bottom_text_color }};
+            }
+            .full-width__overlay-{{ section.id }} .full-width__btn {
+                color: {{ section.settings.button_text_color }};
+                background-color: {{ section.settings.button_bg_color }};
+                border-color: {{ section.settings.button_border_color }};
+            }
+          /* //css for the popup
+         .left {
+              padding: 10px 50px;
+              color: #fff;
+              background-color: #75635a;
+              z-index:999 !important;
+          }
+          .left:hover{
+            color: #fff !important;
+            background-color: #75635a !important;
+          }
+
+          #zero {
+          top: 0;
+          left: 0;
+          position: fixed;
+          background: black;
+          opacity: 0.4;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;;
+        }
+
+        #aa {
+          font-weight: bold;
+          position: fixed;
+          left: 0;
+          right: 0;
+          margin: auto;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+          width: 400px;
+          height: auto;
+          padding: 15px;
+          background: #fdedee;
+          box-sizing: content-box;
+          border: 2px solid #75635a;
+          border-radius: 9px;
+         }
+         #aa .product-icons {
+          margin: 35px 50px 35px 75px;
+      } */
+        .get_your_outer{
+              margin-left: 55px;
+              margin-top: -80px;
+          }
+        .get-yours_heroimage{
+              padding: 10px 50px;
+              color: #fff;
+              margin-left:57px;
+              background-color: #523d33;
+          }
+          .get-yours_heroimage:hover{
+            color: #fff !important;
+            background-color: #d79396 !important;
+          }
+          .get-yours_heroimage::active {
+            background-color: #d79396 !important;
+        }
+       /* .get-yours_heroimage::focus {
+            background-color: #d79396 !important;
+        } */
+      .right {
+        float: right!important;
+        margin-top: 0px !important;
+        color: #755f57;
+    }
+    #shopify-section-1581789117937 div#get-button {
+      display: none;
+  }
+    /* //Mobile css for the popup */
+     @media screen and (max-width: 767px) {
+      /* #aa {
+          width: 300px;
+        }
+       #aa .product-icons {
+        margin: 20px auto 30px;
+      } */
+      .get-yours_heroimage {
+         margin-left: 0px;
+      }
+    }
+{% endstyle %}
+<!--
+  <script>
+      function show(){
+      document.getElementById("zero").style.display = "inline-block";
+      document.getElementById("aa").style.display = "inline-block";
+    }
+
+    function hide() {
+      document.getElementById("zero").style.display = "none";
+      document.getElementById("aa").style.display = "none";
+    }
+  </script>
+-->
+
+<div
+  data-f="full-width-image.liquid"
+  class="full-width__wrapper {% if section.settings.image_height == 'full' %}full-width__full-height{% endif %} full-width__wrapper-{{ section.id }} {{ section.settings.section_class }}"
+  data-aos="fade-up"
+  data-section-id="{{ section.id }}"
+  data-section-type="full-width-overlay-section"
+>
+  {% if section.settings.image != blank %}
+    {% assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="lazyload full-width__image {% if section.settings.image_mobile != blank %}full-width__image-desktop{% endif %} fade-in"
+      src="{{ section.settings.image | img_url: '300x' }}"
+      data-src="{{ img_url }}"
+      data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+      data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+      data-sizes="auto"
+      data-parent-fit="cover"
+      data-hero-image
+      alt="{{ section.settings.image.alt | escape }}"
+      style="object-position: {{ section.settings.image_position }}"
+    >
+  {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
+
+  {% if section.settings.image_mobile != blank %}
+    {% assign img_url = section.settings.image_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+    <img
+      class="full-width__image full-width__image-mobile lazyload fade-in"
+      src="{{ section.settings.image_mobile | img_url: '300x' }}"
+      data-src="{{ img_url }}"
+      data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+      data-aspectratio="{{ section.settings.image_mobile.aspect_ratio }}"
+      data-sizes="auto"
+      data-parent-fit="cover"
+      data-hero-image
+      alt="{{ section.settings.image_mobile.alt | escape }}"
+    >
+  {% endif %}
+  <div class="full-width__overlay slideshow-section-new full-width__overlay-{{ section.id }}">
+    <div class="wrapper full-width__align-wrapper position-{{ section.settings.layout }}">
+      <div class="full-width__text-wrapper {% if section.settings.slide_rotating_text != blank %}has-rotating-text{% endif %}">
+        <div class="full-width__top-text">
+          {{ section.settings.top_text }}
+        </div>
+        <h3 class="full-width__title {% if section.settings.slide_rotating_text != blank %}has-rotating-text{% endif %}">
+          {{ section.settings.title }}
+          {% if section.settings.slide_rotating_text != blank %}
+            <span class="rotating-wrapper">
+              <div class="js-rotating">{{ section.settings.slide_rotating_text | escape }}</div>
+            </span>
+          {% endif %}
+        </h3>
+        <div class="desktoponly full-width__bottom-text">
+          {{ section.settings.bottom_text }}
+        </div>
+        <div class="mobilebttmtext full-width__bottom-text">
+          {{ section.settings.bottom_text_mobile }}
+        </div>
+        {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="full-width__btn btn">
+            {{ section.settings.button_text | escape }}
+          </a>
+        {% endif %}
+        <div class="full-width__bottom-text dev">
+          {{ section.settings.subtitle }}
+        </div>
+        <div id="pop-buttons_desktop" class="pop_btns_hero_desktop">
+          {% include 'hero-image-icons' %}
+        </div>
+        <div id="pop-buttons" class="pop_buttons_hero">
+          {% include 'hero-image-icons' %}
+        </div>
+
+        <div id="get-button" class="get_yours_outer">
+          <button class="get-yours_heroimage" id="g-btn">Get yours</button>
+        </div>
+
+        {% comment %}
+          <div id="zero" style="display:none"></div>
+          <div class="get_your_outer">
+            <a href="#" target="_self" onClick="show()" class="left">Get Yours</a>
+          </div>
+
+          <div id="aa" style="display:none">
+            <a href="#" target="_self" onClick="hide()" class="right">x</a>
+            {% include 'hero-image-icons' %}
+          </div>
+        {% endcomment %}
+
+        <div class="banner-bottom-image hidden-xs">
+          {% if section.settings['bsmall-image'] != blank %}
+            <img
+              class="banner_foot_image"
+              src="{{ section.settings.bsmall-image | img_url: 'master' }}"
+              alt="{{ section.settings.bsmall-image.alt }}"
+            >
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+    "name": "Full Width Image Overlay",
+    "class": "full-width-image-section",
+    "settings": [
+        {
+            "type": "select",
+            "id": "image_height",
+            "label": "Image Height",
+            "default": "adapt",
+            "options": [
+                {
+                    "value": "full",
+                    "label": "Full"
+                },
+                {
+                    "value": "adapt",
+                    "label": "Adapt"
+                }
+            ]
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Mobile Image"
+        },
+        {
+            "type": "text",
+            "id": "top_text",
+            "label": "Top Text"
+        },
+        {
+            "type": "color",
+            "id": "top_text_color",
+            "label": "Top Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title Color",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "slide_rotating_text",
+            "label": "Rotating Text"
+        },
+        {
+            "type": "text",
+            "id": "bottom_text",
+            "label": "Bottom Text"
+        },
+      {
+            "type": "text",
+            "id": "bottom_text_mobile",
+            "label": "Bottom Text for Mobile"
+        },
+        {
+            "type": "color",
+            "id": "bottom_text_color",
+            "label": "Bottom Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "id": "button_bg_color",
+            "label": "Button Background Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "color",
+            "id": "button_border_color",
+            "label": "Button Border Color",
+            "default": "#000000"
+        },
+        {
+            "type": "select",
+            "id": "layout",
+            "label": "Text alignment",
+            "default": "left",
+            "options": [
+                {
+                "value": "left",
+                "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "image_position",
+            "label": "Image alignment",
+            "default": "left",
+            "options": [
+                {
+                "value": "left",
+                "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "section_class",
+            "label": "Class"
+        },
+        {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Sub Title"
+        }
+    ],
+      "blocks": [
+  {
+    "type": "info",
+    "name": "Icon",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+        }
+      ]
+    }
+  ],
+    "presets": [
+        {
+            "name": "Full Width Image",
+            "category": "Image"
+        }
+    ]
+}
+{% endschema %}

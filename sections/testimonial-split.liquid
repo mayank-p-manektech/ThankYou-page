@@ -1,0 +1,201 @@
+{% schema %}
+{
+  "name": "Testimonial Split",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "testimonial_text",
+      "label": "Testimonial Text",
+      "default": "When my doctor recommended rose and rosehip oil to heal a scar, I reached out to Pure Rose because I couldn’t find a product like this anywhere. I had no idea they would create a product just to meet my needs..."
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author Name",
+      "default": "- Elena S."
+    },
+    {
+      "type": "color",
+      "id": "background_color_desktop",
+      "label": "Background Color (Desktop)",
+      "default": "#fdeef1"
+    },
+    {
+      "type": "color",
+      "id": "background_color_mobile",
+      "label": "Background Color (Mobile)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "quote_image_desktop",
+      "label": "Quote Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "quote_image_mobile",
+      "label": "Quote Image (Mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Image for Mobile"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Split",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% style %}
+.testimonial-section {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 50px;
+}
+
+.testimonial-text-block {
+  flex: 1;
+  padding: 60px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+  margin-left: auto;
+}
+
+.quote-image-desktop,
+.quote-image-mobile {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 50px;
+  height: auto;
+}
+
+.testimonial-content {
+  color: #523d33;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.testimonial-author {
+  color: #523d33;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.testimonial-image-block {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+  width: 50%;
+}
+
+.testimonial-img-desktop {
+  width: 100%;
+  aspect-ratio: 1878 / 1253;
+  object-fit: cover;
+  display: block;
+}
+
+.testimonial-img-mobile {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media screen and (max-width: 749px) {
+  .testimonial-section {
+    flex-direction: column;
+    background-color: {{ section.settings.background_color_mobile }};
+    margin-top: 50px;
+  }
+
+  .testimonial-text-block {
+    order: 2;
+    padding: 40px 20px;
+  }
+
+  .testimonial-image-block{
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .testimonial-image-block {
+    order: 1;
+    padding: 0;
+  }
+
+  .testimonial-img-desktop {
+    display: none;
+  }
+
+  .quote-image-desktop {
+    display: none;
+  }
+
+  .quote-image-mobile {
+    display: block;
+  }
+
+  .testimonial-img-mobile{
+        aspect-ratio: 275 / 295;
+    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .testimonial-section {
+    background-color: {{ section.settings.background_color_desktop }};
+  }
+
+  .testimonial-img-mobile {
+    display: none;
+  }
+
+  .quote-image-desktop {
+    display: block;
+  }
+
+  .quote-image-mobile {
+    display: none;
+  }
+}
+{% endstyle %}
+
+<div class="testimonial-section aos-init aos-animate" data-aos="fade-up">
+  <div class="testimonial-text-block">
+    {% if section.settings.quote_image_desktop %}
+      <img src="{{ section.settings.quote_image_desktop | img_url: '100x' }}" alt="Quote" class="quote-image-desktop" loading="lazy" />
+    {% endif %}
+    {% if section.settings.quote_image_mobile %}
+      <img src="{{ section.settings.quote_image_mobile | img_url: '100x' }}" alt="Quote" class="quote-image-mobile" loading="lazy" />
+    {% endif %}
+    <div class="testimonial-content">{{ section.settings.testimonial_text }}</div>
+    <div class="testimonial-author">{{ section.settings.author }}</div>
+  </div>
+
+  <div class="testimonial-image-block">
+    {% if section.settings.right_image %}
+      <img src="{{ section.settings.right_image | img_url: '900x' }}" alt="Testimonial Image Desktop" class="testimonial-img-desktop" loading="lazy" />
+    {% endif %}
+    {% if section.settings.mobile_image %}
+      <img src="{{ section.settings.mobile_image | img_url: '800x' }}" alt="Testimonial Image Mobile" class="testimonial-img-mobile" loading="lazy" />
+    {% endif %}
+  </div>
+</div>

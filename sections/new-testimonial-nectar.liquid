@@ -1,0 +1,123 @@
+<div
+  data-f="product-testimonials-nectar.liquid"
+  class="new-wrapper-nectar"
+  data-aos="fade-up"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-testimonials-nectar-section"
+>
+  <div class="new-product-testimonials-title">{{ section.settings.new-product_testimonials_header }}</div>
+  <div class="new-testimonial-container">
+    {% for block in section.blocks %}
+      <div class="new-testimonial-sub-container">
+        <div class="new-product-testimonials-text">{{ block.settings.new-product_testimonials_text }}</div>
+        <div class="new-product-testimonials-author">{{ block.settings.new-product_testimonials_author }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style></style>
+{% schema %}
+  {
+    "name":"New Testimonials Nectar",
+    "class":"testimonial-section",
+    "max_blocks": 4,
+    "settings": [
+          {
+              "type":"html",
+              "id":"new-product_testimonials_header",
+              "label":"Section Header"
+          }
+      ],
+    "blocks": [
+      {
+      "type": "info",
+      "name": "Testimonial",
+      "settings": [
+          {
+              "type":"richtext",
+              "id":"new-product_testimonials_text",
+              "label":"Text"
+          },
+          {
+              "type":"text",
+              "id":"new-product_testimonials_author",
+              "label":"Author"
+          }
+      ]
+  }
+],
+  "presets": [
+    {
+      "name": "New Testimonials Nectar"
+    }
+  ]
+    
+  }
+{% endschema %}
+
+
+{% stylesheet %}
+
+  .new-wrapper-nectar{
+    background: #fdedee;
+    margin-top: 0;
+    padding: 0 30px;
+    padding-top: 60px;
+    padding-bottom: 70px;
+  } 
+
+  .new-product-testimonials-title {
+    font-family: just lovely;
+    font-size: 6.25em;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    padding-bottom: 60px;
+  }
+
+  .new-testimonial-sub-container .new-product-testimonials-text {
+    margin: unset;
+  }
+
+  .new-testimonial-sub-container {
+    width: 33%;
+    padding: 0 15px;
+  }
+
+  .new-testimonial-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+    margin-top: 30px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .new-testimonial-sub-container {
+      width: 100%;
+      padding: 15px;
+    }
+    .new-wrapper-nectar .new-product-testimonials-title{
+      font-size: 58px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+     .new-wrapper-nectar{
+      padding-bottom: 40px;
+     }
+  }
+  
+{% endstylesheet %}
+
+
+
+
+
+
+
+
+
+
+
+

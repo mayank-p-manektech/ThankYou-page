@@ -1,0 +1,32 @@
+
+    {% assign column_width = 'one-half' %}
+
+<div class="product-icons">
+    <div class="grid">
+    {% for block in section.blocks %}
+         {% if block.type == 'info' %}
+        <div class="grid__item {{ column_width }} text-center">
+            {% if block.settings.image != blank %}
+                <noscript>
+                    {{ block.settings.image | img_url: '200x200' | img_tag: block.settings.image.alt, 'feature-row__image-no-js' }}
+                </noscript>
+                <div class="feature-icon__image-wrapper">
+                {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <img class="feature-icon__image lazyload"
+                    src="{{ block.settings.image | img_url: '200x200' }}"
+                    data-src="{{ img_url }}"
+                    data-widths="[200, 360, 540, 720]"
+                    data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="{{ block.settings.image.alt | escape }}">
+            </div>
+            {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+            <div class="icons__text">{{ block.settings.text }}</div>
+            <div class="icons__subtitle">{{ block.settings.subtitle }}</div>
+        </div>
+         {% endif %}
+    {% endfor %}
+    </div>
+</div>

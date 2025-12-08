@@ -1,0 +1,64 @@
+{% if option_name contains '|' %}
+{% assign words = option_name | split: '|' %}
+{% for word in words %}
+    {% if forloop.index == 1 %}
+    {% assign option_name = word %}
+    {% else %}
+    {% assign option_name = option_name | append: '<span class="pink">|' | append: word | append: '</span>'%}
+    {% endif %}
+{% endfor %}
+{% endif %}
+<label class="single-option-radio__label"
+for="ProductSelect-option-{{ forloop.index0 }}">
+{{ option_name }}
+</label>
+{% if section.settings.product_selector == 'radio' %}
+    <fieldset class="single-option-radio"
+        id="ProductSelect-option-{{ forloop.index0 }}">
+        {% assign default_variant = 1 %}
+        {% if product.metafields.default_variant.default_variant %}
+        {% assign default_variant = product.metafields.default_variant.default_variant %}
+        {% endif %}
+        {% assign option_index = forloop.index %}
+        {% for value in option.values %}
+        {% assign variant_label_state = true %}
+        {% if product.options.size == 1 %}
+            {% unless product.variants[forloop.index0].available  %}
+            {% assign variant_label_state = false %}
+            {% endunless %}
+        {% endif %}
+        
+          
+        <input rel="" type="radio"
+            {% if option.selected_value == value %} checked="checked"{% endif %}
+            {% unless variant_label_state %} disabled="disabled"{% endunless %}
+            value="{{ value | escape }}"
+            data-index="option{{ option_index }}"
+            data-option="{{ value | escape  }}"
+            name="option{{ option.position }}"
+            class="custom-radio-cls-subsc single-option-selector__radio{% unless variant_label_state %} disabled{% endunless %} beta-quantity"
+            id="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}"
+          >
+
+
+           <label for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}" 
+                data-option="{{ value | escape  }}" 
+                data-default="{% if default_variant == forloop.index %}true{% else %}false{% endif %}"
+                class="text-center {% unless variant_label_state %}label-disabled{% endunless %}"
+            >
+                
+                <div class="option-default">{{ value }}</div>
+             </label>
+
+
+          
+         
+        {% endfor %}
+    </fieldset>
+{% else %}
+    <select class="single-option-selector__radio single-option-selector-{{ section.id }} product-form__input" id="SingleOptionSelector-{{ forloop.index0 }}" data-index="option{{ forloop.index }}">
+        {% for value in option.values %}
+        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value | escape }}</option>
+        {% endfor %}
+    </select>
+{% endif %}

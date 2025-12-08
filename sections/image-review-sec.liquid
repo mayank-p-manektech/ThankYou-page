@@ -1,0 +1,87 @@
+<style>
+    .outer-img-review-sec {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .firsthalf {
+          width: 65%;
+      }
+    .secondhalf {
+          width: 35%;
+      }
+    .img-review-text {
+        padding-left: 186px;
+        width: 75%;
+        font-size: 16px;
+        font-weight: 500;
+        text-align:center;
+    }
+    .img-review-img1 {
+          padding-left: 175px;
+      }
+      .secondhalf img {
+        height: 550px;
+    }
+  .firsthalf {
+    width: 65%;    
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+
+
+
+<div class="outer-img-review-sec">
+  <div class="firsthalf">
+      <div class="img-review-img1">    
+       {{ section.settings.review_image1 | image_url: width: 300 | image_tag }}
+      </div>
+      <div class="img-review-text"><p class="innertext">{{ section.settings.text }}</p> </div>
+  </div>
+  
+  <div class="secondhalf">
+     <div class="img-review-img">
+      <img src="{{ section.settings.review_image2 }}" height="" width="" alt="" >
+       {{ section.settings.review_image2 | image_url: width: 500 | image_tag }}
+     </div>
+    
+  </div>
+    
+</div>
+
+
+{% schema %}
+{
+  "name": "Image-review Section",
+  "class": "img-review-sec",
+  "settings": [  
+            {
+            "type": "image_picker",
+            "id": "review_image1",
+            "label":"Add review image"
+            } ,   
+            {
+            "type": "richtext",
+            "id": "text",
+            "label":"Description",
+            "default": "<p>Use this text to share information about your brand with your customers.</p>"
+            },
+            {
+            "type": "image_picker",
+            "id": "review_image2",
+            "label":"Add review image"
+            }       
+          ],
+   "presets": [
+        {
+        "name": "image-review section",
+        "category": {
+        "en": "Main"
+        }
+       }
+      ]
+ }
+{% endschema %}

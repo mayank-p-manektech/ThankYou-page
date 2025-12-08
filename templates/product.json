@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "template": {
+      "type": "product-template",
+      "blocks": {
+        "description_UnxTQg": {
+          "type": "description",
+          "settings": {}
+        },
+        "price_kDdNiw": {
+          "type": "price",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "description_UnxTQg",
+        "price_kDdNiw"
+      ],
+      "settings": {
+        "featured_review": true,
+        "featured_review_author": "",
+        "featured_review_text": "",
+        "review_stars": true,
+        "review_text": "Best thing I have ever used for anxiety. I have no idea how I ever lived without Rose Nectar.",
+        "review_author": "-Natalie",
+        "zoom_enable": false,
+        "social_sharing_products": true,
+        "product_vendor_enable": false,
+        "image_layout": "thumbnails",
+        "quantity_enabled": false,
+        "product_selector": "radio",
+        "enable_payment_button": true,
+        "add_to_cart_button_size": "small"
+      }
+    },
+    "17290259352c83675b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_XFd6xC": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_XFd6xC"
+      ],
+      "settings": {}
+    },
+    "featured_products_YjaTEF": {
+      "type": "featured-products",
+      "settings": {
+        "title": "This bundle includes",
+        "home_featured_products": "",
+        "collection_products_grid": "collage"
+      }
+    },
+    "1732142211e4d68d92": {
+      "type": "apps",
+      "blocks": {
+        "recharge_subscriptions_subscription_widget_v2_yaW87a": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "recharge_subscriptions_subscription_widget_v2_yaW87a"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "template",
+    "17290259352c83675b",
+    "featured_products_YjaTEF",
+    "1732142211e4d68d92"
+  ]
+}

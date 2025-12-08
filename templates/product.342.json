@@ -1,0 +1,328 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "template": {
+      "type": "product-template-nectar",
+      "blocks": {
+        "reviews_R3xbxb": {
+          "type": "reviews",
+          "settings": {
+            "reviews-text": "21,350 reviews"
+          }
+        },
+        "description_rYBRUm": {
+          "type": "description",
+          "settings": {}
+        },
+        "price_UcNUrC": {
+          "type": "price",
+          "settings": {}
+        },
+        "video_carousel_XFnRbX": {
+          "type": "video-carousel",
+          "settings": {}
+        },
+        "accordion_BJAdYt": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "Benefits",
+            "accordion-content": "<ul><li>Protects and rejuvenates your skin</li><li>Raises your vibration</li><li>Elevates your mood</li><li>Cleanses liver & improves digestion</li><li>Promotes cellular health & longevity</li></ul>"
+          }
+        },
+        "accordion_aCf9dD": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "Taste",
+            "accordion-content": "<p>The taste and aroma of Rose Nectar is one of its best and distinct qualities. It's subtle, floral and refreshing, with a slight hint of sweetness. The terpenes of the Bulgarian Rose give it the divine taste and aroma that instantly calm your mind and elevate your mood.</p>"
+          }
+        },
+        "accordion_AYqKGN": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "Ingredients",
+            "accordion-content": "<p>Two Ingredients Only - Organic Bulgarian rose extract, enriched with organic rose oil.</p><p>Zero sugar, additives or preservatives.</p>"
+          }
+        },
+        "accordion_HpNk3F": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "How to use",
+            "accordion-content": "<p>Add a serving (1/4oz, or 1 bottle cap) to 8-32oz of water (based on your taste preference). Drink first thing in the morning and throughout the day. For best results, drink regularly 2 or more servings a day. Add to coffee, tea, smoothie, or any other drink of choice. Drink at least two servings a day. Use in hot and cold drinks alike.</p><p>Get creative and use in other beverages or deserts, or enjoy our High Vibe recipes.</p>"
+          }
+        },
+        "accordion_PNdrCG": {
+          "type": "accordion",
+          "settings": {
+            "accordion-heading": "FAQ",
+            "accordion-content": "<p><strong>DO I HAVE TO KEEP IT REFRIGERATED?</strong></p><p>No need to refrigerate, yet we recommend you use chilled. Keep out of direct sunlight.</p><p><strong>CAN I ADD TO HOT DRINKS</strong></p><p>Yes! Adding to any hot drinks will not compromise the quality of your Rose Nectar.</p><p><strong>SERVING SIZE</strong></p><p>Each serving is 1/4 Oz. We recommend a minimum of 1 tablespoon daily (2 servings). Each serving is sufficient for an 8-32oz drink. Use according to your taste preferences.</p><p><strong>DIFFERENCE BETWEEN ROSE NECTAR AND ROSE WATER</strong></p><p>Rose Nectar is 10-100x more nutrient-rich than rose water. To make your own drinkable rose water, simply mix Rose Nectar with 8-16oz of water.</p><p></p><p><strong>CAN I TAKE DURING PREGNANCY?</strong></p><p>This would be considered medical advice, which we are not allowed to provide. Please consult with your doctor.</p><p><strong>HOW MUCH IS SHIPPING?</strong></p><p>Shipping is calculated at checkout depending on the weight and location.</p><p><strong>DO YOU OFFER FREE SHIPPING?</strong></p><p>Yes. We offer free US shipping on orders over $150+</p>"
+          }
+        }
+      },
+      "block_order": [
+        "reviews_R3xbxb",
+        "description_rYBRUm",
+        "price_UcNUrC",
+        "video_carousel_XFnRbX",
+        "accordion_BJAdYt",
+        "accordion_aCf9dD",
+        "accordion_AYqKGN",
+        "accordion_HpNk3F",
+        "accordion_PNdrCG"
+      ],
+      "custom_css": [
+        ".product-price-wrapper {display: none;}",
+        "#money-saved {display: none !important;}"
+      ],
+      "settings": {
+        "featured_review": true,
+        "featured_review_author": "- Natalie",
+        "featured_review_text": "Best thing I have ever used for anxiety. I have no idea how I ever lived without Rose Nectar.",
+        "zoom_enable": false,
+        "social_sharing_products": false,
+        "product_vendor_enable": false,
+        "image_layout": "thumbnails",
+        "product_selector": "radio",
+        "enable_payment_button": false,
+        "video-1": "shopify://files/videos/rosenectarfinal.mp4",
+        "video-2": "shopify://files/videos/damascena_555c8a8e-8ba9-4646-8708-cf1a82fbf046.mp4",
+        "video-3": "shopify://files/videos/thevalley_5b18289e-0828-45ac-bf58-b7ac48f8d749.mp4",
+        "add_to_cart_button_size": "small"
+      }
+    },
+    "product_icons_XyYxQx": {
+      "type": "product-icons",
+      "blocks": {
+        "info_NLynfi": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p2.png",
+            "block-title": "Elevates Your",
+            "block-text": "Mood"
+          }
+        },
+        "info_6KghbC": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p3.png",
+            "block-title": "Calms your",
+            "block-text": "Mind"
+          }
+        },
+        "info_3EDLh3": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p1.png",
+            "block-title": "Nourishes",
+            "block-text": "Body & Skin"
+          }
+        },
+        "info_fBfVGN": {
+          "type": "info",
+          "settings": {
+            "image": "shopify://shop_images/p4.png",
+            "block-title": "Raises your",
+            "block-text": "Vibrations"
+          }
+        }
+      },
+      "block_order": [
+        "info_NLynfi",
+        "info_6KghbC",
+        "info_3EDLh3",
+        "info_fBfVGN"
+      ],
+      "settings": {
+        "heading1": "Taste, Smell & Feel",
+        "heading2": " Happiness!",
+        "heading3": ""
+      }
+    },
+    "product_why_nectar_a7dtmA": {
+      "type": "product-why-nectar",
+      "blocks": {
+        "info_8pMqHX": {
+          "type": "info",
+          "settings": {
+            "title": "#1",
+            "text": "Vibrational Energy Food"
+          }
+        },
+        "info_eBLQci": {
+          "type": "info",
+          "settings": {
+            "title": "100%",
+            "text": "pure, natural & organic"
+          }
+        },
+        "info_fAJja8": {
+          "type": "info",
+          "settings": {
+            "title": "288",
+            "text": "Bulgarian roses in 16oz"
+          }
+        },
+        "info_ykqwpg": {
+          "type": "info",
+          "settings": {
+            "title": "2",
+            "text": "ingredients only rose extract & rose oil"
+          }
+        },
+        "info_3w97y8": {
+          "type": "info",
+          "settings": {
+            "title": "0",
+            "text": "sugar, calories or additives"
+          }
+        },
+        "info_XqRrwT": {
+          "type": "info",
+          "settings": {
+            "title": "100x",
+            "text": "10-100x more nutrients than rose water"
+          }
+        }
+      },
+      "block_order": [
+        "info_8pMqHX",
+        "info_eBLQci",
+        "info_fAJja8",
+        "info_ykqwpg",
+        "info_3w97y8",
+        "info_XqRrwT"
+      ],
+      "settings": {
+        "heading": "Why Rose Nectar"
+      }
+    },
+    "featured_row_video_BzWLzH": {
+      "type": "featured-row-video",
+      "custom_css": [],
+      "settings": {
+        "full-width": true,
+        "video": "https://cdn.shopify.com/s/files/1/0091/8444/4495/files/pure_rose_pour_v3.mp4?v=1600595842",
+        "layout": "left",
+        "title": "Elevate Your Drink",
+        "text": "<p>Turn your water or any other drink into healthy hydration. More antioxidants and natural vitamins than fruit, without any sugar or calories.</p>",
+        "additional_image": "shopify://shop_images/r1.png",
+        "additional_text": "<p>Add a</p><p>serving to 32oz</p><p>of water, coffee,</p><p>smoothie or tea.</p>",
+        "additional_arrow": "shopify://shop_images/arrow1.png",
+        "button_label": "",
+        "button_link": "",
+        "section_class": "rose-nectar-elixirs"
+      }
+    },
+    "featured_recipes_f6MWbD": {
+      "type": "featured-recipes",
+      "settings": {
+        "title": "High Vibe Recipes",
+        "image": "shopify://shop_images/bottle_icon_256x256_11211cbd-64c4-4696-9524-45ec8cd7b7c7.png",
+        "blog": "recipes",
+        "post_limit": 6,
+        "blog_show_date": false,
+        "blog_show_author": false,
+        "blog_show_image": true,
+        "blog_show_excerpt": false,
+        "show_view_all": true,
+        "view_all_text": "See More Recipes"
+      }
+    },
+    "product_testimonials_nectar_8cQwnL": {
+      "type": "product-testimonials-nectar",
+      "blocks": {
+        "info_iEprrx": {
+          "type": "info",
+          "settings": {
+            "product_testimonials_text": "<p>I was skeptical and did not expect the nectar to actually \"feel good\" energetically even though it was claimed to be a \"high vibrational\" substance. Even for a skeptic, the feeling it sends down my body within seconds of drinking it leaves no doubt. This is the stuff that will heal and help you.</p>",
+            "product_testimonials_author": "Quinn Y., PhD"
+          }
+        }
+      },
+      "block_order": [
+        "info_iEprrx"
+      ],
+      "disabled": true,
+      "settings": {
+        "product_testimonials_header": "Real Customers. Real Reviews."
+      }
+    },
+    "new_testimonial_nectar_znUPnQ": {
+      "type": "new-testimonial-nectar",
+      "blocks": {
+        "info_Cpj7MF": {
+          "type": "info",
+          "settings": {
+            "new-product_testimonials_text": "<p>I was skeptical and did not expect the nectar to actually \"feel good\" energetically even though it was claimed to be a \"high vibrational\" substance. Even for a skeptic, the feeling it sends down my body within seconds of drinking it leaves no doubt. This is the stuff that will heal and help you.</p>",
+            "new-product_testimonials_author": "Quinn Y., PhD"
+          }
+        }
+      },
+      "block_order": [
+        "info_Cpj7MF"
+      ],
+      "settings": {
+        "new-product_testimonials_header": "Real Customers.<br> Real Reviews."
+      }
+    },
+    "additional_products_eAkDWN": {
+      "type": "additional-products",
+      "blocks": {
+        "product_M66dPH": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/1_1_94ab7267-8ff6-47b8-b666-dc9e79790ef9.jpg",
+            "product": "shopify://products/pure-rose-mist",
+            "heading": "Rose Mist"
+          }
+        },
+        "product_jydgHV": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/3_1.jpg",
+            "product": "shopify://products/rose-yummies",
+            "heading": "Rose Yummies"
+          }
+        }
+      },
+      "block_order": [
+        "product_M66dPH",
+        "product_jydgHV"
+      ],
+      "settings": {
+        "heading": "More from PureRose"
+      }
+    },
+    "1726718191561a68a2": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_KxdeBk": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_KxdeBk"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "template",
+    "product_icons_XyYxQx",
+    "product_why_nectar_a7dtmA",
+    "featured_row_video_BzWLzH",
+    "featured_recipes_f6MWbD",
+    "product_testimonials_nectar_8cQwnL",
+    "new_testimonial_nectar_znUPnQ",
+    "additional_products_eAkDWN",
+    "1726718191561a68a2"
+  ]
+}

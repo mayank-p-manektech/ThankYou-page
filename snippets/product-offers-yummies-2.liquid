@@ -1,0 +1,116 @@
+<div class="mist-offers" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+    <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+    {% capture "form_classes" %}
+      product-single__form{% if product.has_only_default_variant %} product-single__form--no-variants{% endif %}
+    {%- endcapture %}
+    {% capture "form_id" %}AddToCartForm--{{ section.id }}{%- endcapture %}
+
+    {% form 'product', product, data-productid: product.id, class:form_classes, id:form_id, data-product-form: '' %}
+    <input type="hidden" style="display: none;" id="variant-check" data-variant={{product.variants | json }}  >
+          {% comment %}
+        Optionally show the 'compare at' or original price of the product.
+      {% endcomment %}
+    
+    <div class="grid--flex product-offers">
+
+      <div class="product-price-wrapper">
+  		{% comment %}
+        {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+          <div class="product-single__policies rte">
+            {%- if shop.taxes_included -%}
+              {{ 'products.general.include_taxes' | t }}
+            {%- endif -%}
+            {%- if shop.shipping_policy.body != blank -%}
+              {{ 'products.general.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+  		{% endcomment %}
+         {% include 'product-options-sugar-free' %}
+      <select name="id" data-productid="{{ product.id }}" id="ProductSelect" class="product-single__variants no-js">
+        {% for variant in product.variants %}
+          {% if variant.available %}
+            <option {% if variant == product.selected_or_first_available_variant %}
+              selected="selected" {% endif %}
+              data-sku="{{ variant.sku }}"
+              value="{{ variant.id }}">
+              {{ variant.title }} - {{ variant.price | money_with_currency }}
+            </option>
+          {% else %}
+            <option disabled="disabled">
+              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+            </option>
+          {% endif %}
+        {% endfor %}
+      </select>
+      </div>
+            <div class="one-half product-qty-wrapper">
+        {% if section.settings.quantity_enabled %}
+          <div class="product-single__quantity">
+            <label for="Quantity" class="product-single__quantity-label js-quantity-selector">
+              {{- 'products.product.quantity' | t -}}
+            </label>
+            <input
+              type="number"
+              hidden="hidden"
+              id="Quantity"
+              name="quantity"
+              value="1"
+              min="1"
+              class="js-quantity-selector"
+            >
+          </div>
+        {% endif %}
+
+        <!-- Begin ReCharge code -->
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when '@app' %}
+              {% render block %}
+            {% when 'stay_ai_subscriptions' %}
+              {% render 'rtx-pdp', product: product, block: block, product_form_id: form_id %}
+          {% endcase %}
+        {% endfor %}
+        <!-- End ReCharge code -->
+
+        <p id="money-saved" style="display: flex;">Save <b id="money-saved-amount"></b></p>
+
+        {% include 'product-price', variant: current_variant %}
+        {% include 'product-price-info-yummies' %}
+
+        <div class="product-single__add-to-cart{% if section.settings.add_to_cart_button_size == 'large' %} product-single__add-to-cart--full-width{% endif %}">
+          <button
+            style="visibility: visible;"
+            type="submit"
+            name="add"
+            id="AddToCart--{{ section.id }}"
+            class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %}"
+            {% unless current_variant.available %}
+              disabled="disabled"
+            {% endunless %}
+          >
+            <span class="btn__text">
+              {% if current_variant.available %}
+                {% comment %} {{ 'products.product.add_to_cart' | t }} {% endcomment %}
+                Add to cart
+              {% else %}
+                {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </span>
+          </button>
+          {% if section.settings.enable_payment_button %}
+            {{ form | payment_button }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endform %}
+  </div>
+<div style="text-align: center; margin: 20px 0px;" class="dev-hide-desktop">
+<div><span class="spr-starrating spr-badge-starrating"><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i></span></div>
+        <div>{{ product.metafields.images_info.text }}</div>
+        <div style="color: #000;" class="product-images-info-title">{{ product.metafields.images_info.title }}</div>
+
+</div>

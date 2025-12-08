@@ -1,0 +1,61 @@
+<div data-f="homepage-why-nectar.liquid " data-aos="fade-up" data-section-id="{{ section.id }}" data-section-type="why-nectar-section">
+    <div class="wrapper">
+        <h3 class="why-nectar__heading">{{ section.settings.heading }}</h3>
+        {% case section.blocks.size %}
+            {% when 0 %}
+            {% when 1 %}
+                {% assign column_width = '' %}
+            {% when 2 %}
+                {% assign column_width = 'one-half' %}
+            {% when 3 %}
+                {% assign column_width = 'one-third' %}
+            {% when 4 %}
+                {% assign column_width = 'one-quarter' %}
+        {% endcase %}
+        <div class="grid why-nectar__slider-wrapper">
+            {% for block in section.blocks %}
+                <div class="grid__item {{ column_width }}">
+                    <div class="why-nectar__title">{{ block.settings.title }}</div>
+                    <div class="why-nectar__text">{{ block.settings.text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "Why Nectar",
+  "class": "why-nectar-section",
+  "settings": [
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+        "name": "Why Nectar",
+        "category": "Info"
+    }
+  ],
+  "blocks": [
+    {
+        "type": "info",
+        "name": "Info",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "text",
+                "id": "text",
+                "label": "Text"
+            }
+        ]
+    }
+  ]
+}
+{% endschema %}

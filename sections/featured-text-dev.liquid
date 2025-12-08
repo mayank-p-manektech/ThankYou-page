@@ -1,0 +1,106 @@
+{% schema %}
+{
+  "name": "Featured Text - DEV",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_pink",
+      "label": "Title (Pink Part)",
+      "default": "Powerful"
+    },
+    {
+      "type": "text",
+      "id": "title_brown",
+      "label": "Title (Brown Part)",
+      "default": "Duo"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_desktop",
+      "min": 40,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Title font size (Desktop)",
+      "default": 86
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 30,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Title font size (Mobile)",
+      "default": 60
+    },
+    {
+      "type": "text",
+      "id": "subtitle_text",
+      "label": "Subtitle",
+      "default": "The 2 best oils for skin have finally come together!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Text - DEV",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}
+
+{% style %}
+
+.powerful-duo.wrapper {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.powerful-duo__title {
+  font-family: 'Just Lovely', cursive;
+  font-size: {{ section.settings.title_font_size_desktop }}px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.powerful-duo__title .pink {
+  color: #fac8ca;
+}
+
+.powerful-duo__title .brown {
+  color: #523d33;
+}
+
+.powerful-duo__subtitle {
+  font-size: 18px;
+  color: #523d33;
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+@media screen and (max-width: 769px){
+  .powerful-duo.wrapper {
+
+    padding: 40px 20px 0;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .powerful-duo__title {
+    font-size: {{ section.settings.title_font_size_mobile }}px;
+  }
+
+  .powerful-duo__subtitle {
+    font-size: 16px;
+  }
+}
+{% endstyle %}
+
+<div class="powerful-duo wrapper aos-init aos-animate" data-aos="fade-up">
+  <h2 class="powerful-duo__title">
+    <span class="pink">{{ section.settings.title_pink }}</span>
+    <span class="brown"> {{ section.settings.title_brown }}</span>
+  </h2>
+  <p class="powerful-duo__subtitle">{{ section.settings.subtitle_text }}</p>
+</div>

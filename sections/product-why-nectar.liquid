@@ -1,0 +1,51 @@
+<div data-f="product-why-nectar.liquid " data-aos="fade-up" data-section-id="{{ section.id }}" data-section-type="why-nectar-section">
+    <div>
+        <h3 class="why-nectar__heading">{{ section.settings.heading }}</h3>
+        <div class="grid why-nectar-container">
+            {% for block in section.blocks %}
+                <div class="grid__item">
+                    <div class="why-nectar__title">{{ block.settings.title }}</div>
+                    <div class="why-nectar__text">{{ block.settings.text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Styles in custom_styles.css.liquid -->
+{% schema %}
+{
+  "name": "Why Nectar",
+  "class": "why-nectar-section product-why-nectar-section",
+  "settings": [
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+        "name": "Why Nectar",
+        "category": "Info"
+    }
+  ],
+  "blocks": [
+    {
+        "type": "info",
+        "name": "Info",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "text",
+                "id": "text",
+                "label": "Text"
+            }
+        ]
+    }
+  ]
+}
+{% endschema %}

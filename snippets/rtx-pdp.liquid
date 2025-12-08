@@ -1,0 +1,548 @@
+{%- comment -%}
+  RTX PDP Snippet
+  January, 2025
+{%- endcomment -%}
+
+{% comment %}
+  Displays product purchase options
+  Accepts:
+  - product: {Object} product object
+  - block: {Object} passing the Stay AI block information (optional)
+  - product_form_id: {String} product form id (optional)
+
+  Usage:
+  {% render 'rtx-pdp', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+
+<script type="module" src="{{ 'rtx-pdp.js' | asset_url }}" defer></script>
+
+<script>console.log("Somehow we have made it here though??", {{ product.selling_plan_groups | json }})</script>
+
+{%- comment -%} Liquid variables with default values {%- endcomment -%}
+{%- liquid
+  assign retextionAppId = '5859381'
+  if template.name != product
+    assign product = all_products[product]
+  endif
+  assign currentVariant = variant | default: product.selected_or_first_available_variant
+  assign sellingPlanGroups = product.selling_plan_groups | where: 'app_id', retextionAppId
+  assign show_purchase_options = block.settings.show_purchase_options | default: true, allow_false: true
+  if block == null
+    assign purchase_type_label = 'Purchase Type'
+    assign frequency_heading = 'Frequency'
+  else
+    assign purchase_type_label = block.settings.purchase_type_label
+    assign frequency_heading = block.settings.frequency_heading
+  endif
+  assign one_time_purchase_label = block.settings.one_time_purchase_label | default: 'One Time Purchase'
+  assign subscription_label = block.settings.subscription_label | default: sellingPlanGroups.first.name
+  assign default_to_subscription = block.settings.default_to_subscription | default: false, allow_false: true
+  assign default_to_subscription_on_variant_change = block.settings.default_to_subscription_on_variant_change | default: false, allow_false: true
+  assign subscription_label_first = block.settings.subscription_label_first | default: false, allow_false: true
+  assign display_compare_at_price = block.settings.display_compare_at_price | default: true, allow_false: true
+  assign compare_at_price_first = block.settings.compare_at_price_first | default: true, allow_false: true
+  assign frequencyVisible = block.settings.frequency_visible | default: false, allow_false: true
+  assign show_subscription_details = block.settings.show_subscription_details | default: true, allow_false: true
+  assign icon_path = block.settings.icon_path | default: "<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg' ><path fill='currentColor' d='M13.64 2.35C12.19 0.9 10.2 0 7.99 0C3.57 0 0 3.58 0 8C0 12.42 3.57 16 7.99 16C11.72 16 14.83 13.45 15.72 10H13.64C12.82 12.33 10.6 14 7.99 14C4.68 14 1.99 11.31 1.99 8C1.99 4.69 4.68 2 7.99 2C9.65 2 11.13 2.69 12.21 3.78L8.99 7H15.99V0L13.64 2.35Z'></path></svg>"
+  assign subscription_details_box_button_text = block.settings.subscription_details_box_button_text | default: 'Subscription Details'
+  assign subscription_details_box_title = block.settings.subscription_details_box_title | default: 'How subscriptions work'
+  assign subscription_details_box_content = block.settings.subscription_details_box_content | default: 'Products are automatically delivered on your schedule. No obligation, modify or cancel your subscription anytime.'
+  assign widget_layout = block.settings.widget_layout | default: 'standard'
+  assign requiresPlan = product.requires_selling_plan
+  assign selectedAllocation = null
+  assign selectedOrFirstAllocation = null
+  for allocation in currentVariant.selling_plan_allocations
+    assign group = sellingPlanGroups | where: 'id', allocation.selling_plan_group_id | first
+    if group == blank
+      continue
+    endif
+    if allocation.selling_plan.selected
+      assign selectedAllocation = allocation
+      assign selectedOrFirstAllocation = allocation
+      break
+    endif
+  endfor
+-%}
+
+{%- if sellingPlanGroups.size > 0 and show_purchase_options -%}
+  {%- comment -%}
+    Selling plan options
+  {%- endcomment -%}
+  {%- liquid
+    assign allocationCount = 0
+    capture sellingPlanOptions
+      for allocation in currentVariant.selling_plan_allocations
+        assign plan = allocation.selling_plan
+        assign group = sellingPlanGroups | where: 'id', allocation.selling_plan_group_id | first
+        if group == blank
+          continue
+        endif
+
+        if selectedOrFirstAllocation == blank
+          assign selectedOrFirstAllocation = allocation
+        endif
+
+        echo '<option'
+        if allocationCount == 0
+          echo ' selected'
+        endif
+        echo ' value="' | append: plan.id | append: '">'
+        echo plan.options[0].value | escape
+        echo '</option>'
+        assign allocationCount = allocationCount | plus: 1
+      endfor
+    endcapture
+  -%}
+
+  {%- comment -%}
+    Styles for the purchase options
+  {%- endcomment -%}
+  <style type="text/css">
+    :root {
+      --text-color: {{ block.settings.text_color | default: '#2E2A39'}};
+      --font-family: {% if block.settings.include_custom_font %}{{ block.settings.font_family.family | default: 'Montserrat'}}; {% else %} inherit; {% endif %}
+      --font-size: {{ block.settings.font_size | default: '16'}}px;
+      --border-radius: {{ block.settings.border_radius | default: '5'}}px;
+      --border-width: {{ block.settings.border_width | default: '1'}}px;
+      --border-color: {{ block.settings.border_color | default: '#2E2A39BF'}};
+      --selected-text-color: {{ block.settings.selected_text_color | default: '#000'}};
+      --bg-color: {{ block.settings.bg_color | default: '#f1f1f1'}};
+      --selected-bg-color: {{ block.settings.selected_bg_color | default: '#f1f1f1'}};
+      --accent-color: {{ block.settings.accent_color | default: '#000'}};
+    }
+    .stay-ai-subscriptions {
+        display: none;
+    }
+    .stay-ai-subscriptions.is-visible {
+        display: block;
+        margin-block-end: 18px;
+    }
+    .rtx-subscription,.rtx-subcription *, .rtx-subscription__label {
+        box-sizing: border-box;
+        color: var(--text-color)!important;
+        font-family: var(--font-family)!important;
+        font-size: var(--font-size)!important;
+    }
+    .rtx-subscription {
+        justify-content: space-between;
+    }
+    .rtx-widget .rtx-purchase-label:last-child {
+      margin-bottom: 10px;
+    }
+
+    .rtx-widget{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .rtx-subscription-dropdown {
+      border: none;
+      margin-left: none !important;
+    }
+
+    /* Widget layout */
+    {% if widget_layout == "stacked-buttons" %}
+      .rtx-purchase-label input{
+        display: none!important;
+      }
+    {% elsif widget_layout == "side-by-side-buttons" %}
+      .rtx-widget {
+        align-items: center;
+        flex-direction: row;
+        gap:10px;
+      }
+      .rtx-purchase-label__wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+      .rtx-purchase-label input{
+        display: none!important;
+      }
+      .rtx-purchase-label__inner{
+        margin-bottom: 0px;
+      }
+    {% endif %}
+    {% if subscription_label_first %}
+      .rtx-purchase-label:last-of-type{
+        order: 1;
+      }
+      .rtx-purchase-label:first-of-type{
+        order: 2;
+      }
+    {% endif %}
+
+    /* Purchase labels */
+    .rtx-subscription label{
+        width: 100%;
+        cursor: pointer;
+    }
+
+    [for="purchaseTypeSubscription"].is-selected .rtx-purchase-label__wrapper {
+      /* padding-bottom: 0px !important; */
+    }
+    .rtx-purchase-label__wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 10px;
+      border: var(--border-width) solid var(--border-color);
+      background-color: var(--bg-color);
+      opacity: .7;
+    }
+    .rtx-purchase-label__inner {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row !important;
+      cursor: pointer;
+      gap: 5px;
+    }
+    .rtx-purchase-label__inner > span {
+      display: flex;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    label.is-selected .rtx-purchase-label__wrapper {
+      color:  var(--selected-text-color);
+      background-color:  var(--selected-bg-color);
+      opacity: 1;
+    }
+
+    /* Purchase type input */
+    .rtx-purchase-label input{
+      width: 20px;
+      height: 20px;
+      display: block;
+      margin: 0px;
+      accent-color: var(--accent-color);
+    }
+
+    /* Price */
+    label.is-selected [data-rtx-subscription-price=''], label.is-selected [data-rtx-onetime-price='']{
+      color: var(--selected-text-color);
+      font-weight: bold;
+    }
+
+    [data-rtx-onetime-price='']{
+      margin-left: auto;
+    }
+
+    [data-rtx-subscription-price='']{
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      flex: 1;
+    }
+    [data-rtx-subscription-price=''] s{
+      font-size:13px;
+      opacity: 0.7;
+      color: var(--text-color);
+    }
+    .is-selected [data-rtx-subscription-price=''] s{
+      color: var(--selected-text-color);
+    }
+
+    /* Display compare at price */
+    {% if display_compare_at_price == false %}
+      [data-rtx-subscription-price=''] s{
+        display:none;
+      }
+    {% endif %}
+
+    /* Display compare at price position */
+    {% if compare_at_price_first == false %}
+        [data-rtx-subscription-price='']{
+        flex-direction: row-reverse;
+        }
+        [data-rtx-subscription-price='']{
+        justify-content: flex-start;
+        }
+    {% endif %}
+
+    /* Subscription box that displays the frequency selector */
+    {% if frequencyVisible == false %}
+      .rtx-subscription-box{
+        display:none;
+      }
+    {% endif %}
+
+    .rtx-subscription-box.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      margin-left: 23px;
+    }
+
+    .frequency-heading{
+      font-weight: bold;
+    }
+    
+    select[name='rtx_selling_plan']{
+      width: fit-content;
+      padding: 5px 15px;
+      padding-left: 5px;
+      padding-right: 25px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-family: var(--font-family)!important;
+      cursor: pointer;
+    }
+
+    select[name='rtx_selling_plan']:hover{
+      outline: none;
+    }
+    
+    .hidden {
+      display: none;
+    }
+
+    .rtx-subscription-details-box {
+      display: none;
+    }
+    .rtx-subscription-details-box.is-visible {
+      display: block;
+    }
+    /* Subscription Detail Box */
+    .rtx-modal-button {
+      padding: 0;
+      font-size: 16px;
+      background: none;
+      border: none;
+      text-transform: initial;
+      height: auto;
+      min-height: 0;
+      margin-left: 0px;
+      cursor: pointer;
+      margin-top: 10px;
+      color: var(--text_color);
+      font-family: var(--font-family) !important;
+      font-size: var(--font-size) !important;
+    }
+
+
+    /* Modal content */
+    .rtx-modal__content {
+      position: absolute;
+      z-index: 5;
+      background: white;
+      width: auto;
+      max-width: 25rem;
+      overflow-x: hidden;
+      padding: 1rem 2rem;
+      font-size: 15px;
+      transform: translateY(-1rem);
+      margin-top: 5px;
+      margin-left: 12px;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 2px 0px rgba(0, 0, 0, 0.24);
+    }
+
+    /* Modal container */
+    .rtx-modal {
+      z-index: 5;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    /* Hover effect for button and showing modal content */
+    .rtx-modal-button:hover ~ .rtx-modal {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+    }
+
+    .rtx-modal-button:hover + .rtx-modal .rtx-modal__content {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .disable{
+      pointer-events: none;
+      cursor: none;
+      opacity: 0.5;
+    }
+
+    .subscription-savings {
+      margin-right: 10px;
+      display: none !important;
+    }
+
+    .one-time-purchase-label,
+    .subscription-label {
+      font-weight: bold;
+      margin-right: 30px;
+    }
+
+    .custom-text {
+      font-size: 12px;
+      margin-top: 5px;
+      padding-left: 4px;
+    }
+
+    @media screen and (min-width: 768px){
+      .custom-text {
+      font-size: 13px;
+      }
+    }
+    .custom-text span {
+      color: #fac8ca;
+      font-weight: 16px;
+      padding-right: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .rtx-widget {
+        flex-direction: column;
+      }
+      .rtx-modal__content {
+          max-width: 90%;
+          padding: 1rem;
+          font-size: 16px;
+      }
+    }
+  </style>
+
+  <purchase-options
+    id="rtx-subscription-widget-{{product.id}}-{{section.id}}"
+    productData="{{ product | json | escape}}"
+    productFormId="{{ product_form_id }}"
+    currentVariantId="{{ product.selected_or_first_available_variant.id | json }}"
+  >
+    <div class="stay-ai-subscriptions is-visible">
+      <span class="rtx-subscription__label">{{ purchase_type_label }}</span>
+      <div data-rtx-subscription class="rtx-subscription">
+        <div class="rtx-widget">
+          <label
+            for="purchaseTypeOneTime"
+            class="rtx-purchase-label {% if default_to_subscription == false %}is-selected{% endif %}"
+          >
+            <div class="rtx-purchase-label__wrapper">
+              <div class="rtx-purchase-label__inner">
+                <input
+                  type="radio"
+                  id="purchaseTypeOneTime"
+                  name="purchaseType"
+                  value="purchaseTypeOneTime"
+                  {% if default_to_subscription == false %}
+                    checked
+                  {% endif %}
+                >
+                <span class="one-time-purchase-label">{{ one_time_purchase_label }}</span>
+                <span data-rtx-onetime-price class="one-time-price">{{ currentVariant.price | money_without_trailing_zeros }}</span>
+              </div>
+            </div>
+          </label>
+
+          <label
+            for="purchaseTypeSubscription"
+            class="rtx-purchase-label {% if default_to_subscription %}is-selected{% endif %}"
+          >
+            <div class="rtx-purchase-label__wrapper">
+              <div class="rtx-purchase-label__inner">
+                <input
+                  type="radio"
+                  id="purchaseTypeSubscription"
+                  name="purchaseType"
+                  value="purchaseTypeSubscription"
+                  {% if default_to_subscription %}
+                    checked
+                  {% endif %}
+                >
+                <span class="subscription-label">{{ subscription_label }}</span>
+                <span class="subscription-savings">
+                  {%- liquid
+                    assign savings = ''
+                    assign discount = selectedOrFirstAllocation.selling_plan.price_adjustments.first
+                    assign savings = discount.value
+                    if savings != blank and savings > 0
+                      if discount.value_type == 'percentage'
+                        echo ' ' | append: savings | append: '%'
+                      else
+                        echo savings | money_without_trailing_zeros
+                      endif
+                    endif
+                  -%}
+                </span>
+                <span data-rtx-subscription-price class="total-sub-price"
+                  > {{ selectedOrFirstAllocation.price | money -}}
+                </span>
+                {% comment %}
+                       <div class="money-saved">
+          <div class="money-saved-percentage">          
+            <span class="current-price"></span>
+            <span class="original-price-tachado" style="display: none; text-decoration: line-through;"></span>
+            <span class="savings-percent" style="display: none;"></span>
+          </div>
+          <div class="money-saved-amount-container" style="display: none;">
+            Save
+            <b class="money-saved-amount"></b>
+          </div>
+        </div>
+              {% endcomment %}
+              </div>
+              {% comment %}
+                <span data-rtx-subscription-price
+                  ><s>{{ currentVariant.price | money }}</s> {{ selectedOrFirstAllocation.price | money -}}
+                </span>
+              {% endcomment %}
+              <div class="custom-text">
+                <div><span class="custom-icon">&#10003;</span> Modify, pause or cancel anytime after 2nd month</div>
+                <div><span class="custom-icon">&#10003;</span> Unlock extra savings after 5th shipment</div>
+              </div>
+              <!-- Subscription frequency selector -->
+              <div
+                data-retextion-subscription-box
+                class="
+                  rtx-subscription-box
+                  {% if requiresPlan or frequencyVisible or default_to_subscription %}
+                  is-visible
+                  {% endif %}
+                "
+              >
+                {% if frequency_heading != blank -%}
+                  <span class="frequency-heading">{{ frequency_heading }}</span>
+                {%- endif %}
+                <select class="rtx-subscription-dropdown" name="rtx_selling_plan">
+                  <option
+                    value=""
+                    {% if selectedAllocation == blank %}
+                      selected
+                    {% endif %}
+                  >
+                    Select frequency
+                  </option>
+                  {{- sellingPlanOptions -}}
+                </select>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <!-- Subscription Detail Box -->
+        {%- if show_subscription_details -%}
+          <div class="rtx-subscription-details-box {% if show_subscription_details %}is-visible{% endif %}">
+            <button type="button" class="rtx-modal-button" data-rtx-modal-open>
+              <span class="icon-container">{{ icon_path | raw }}</span>
+              <span class="subscription-details-button-text">{{ subscription_details_box_button_text }}</span>
+            </button>
+            <div class="rtx-modal" data-rtx-modal>
+              <div class="rtx-modal__content">
+                <span class="subscription-details-title">{{ subscription_details_box_title }}</span>
+                <p class="subscription-details-content">{{ subscription_details_box_content }}</p>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </purchase-options>
+{%- endif -%}

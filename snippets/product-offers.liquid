@@ -1,0 +1,40 @@
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+  <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+  {% capture "form_classes" %}
+    product-single__form{% if product.has_only_default_variant %} product-single__form--no-variants{% endif %}
+  {%- endcapture %}
+  {% capture "form_id" %}AddToCartForm--{{ section.id }}{%- endcapture %}
+
+  {% form 'product', product, data-productid: product.id, class:form_classes, id:form_id, data-product-form: '' %}
+  
+  <div class="grid--flex product-offers">
+    <div class="product-price-wrapper">
+      {% comment %}
+        Optionally show the 'compare at' or original price of the product.
+      {% endcomment %}
+      
+    {% include 'product-options' , variantinfo: product.variants %}
+
+    <select name="id" data-productid="{{ product.id }}" id="ProductSelect" class="product-single__variants no-js">
+      {% for variant in product.variants %}
+        {% if variant.available %}
+          <option {% if variant == product.selected_or_first_available_variant %}
+            selected="selected" {% endif %}
+            data-sku="{{ variant.sku }}"
+            value="{{ variant.id }}">
+            {{ variant.title }} - {{ variant.price | money_with_currency }}
+          </option>
+        {% else %}
+          <option disabled="disabled">
+            {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+          </option>
+        {% endif %}
+      {% endfor %}
+    </select>
+    </div>
+    {% include 'product-qty' %}
+  </div>
+  {% endform %}
+</div>

@@ -1,0 +1,121 @@
+<section class="video-carousel-section-2">
+  <div class="video-carousel-container-2 snippet">
+      {% if video %}
+        <div class="video-container">
+        {{ video | video_tag: controls: false }}
+        <img src="{{ 'arrow-play-new.svg' | asset_url }}" class="play-button-new">
+        </div>
+      {% endif %}
+      {% if video_2 %}
+        <div class="video-container">
+        {{ video_2 | video_tag: controls: false }}
+        <img src="{{ 'arrow-play-new.svg' | asset_url }}" class="play-button-new">
+        </div>
+      {% endif %}
+      {% if video_3 %}
+        <div class="video-container">
+        {{ video_3 | video_tag: controls: false }}
+        <img src="{{ 'arrow-play-new.svg' | asset_url }}" class="play-button-new">
+        </div>
+      {% endif %}
+      {% if video_4 %}
+        <div class="video-container">
+        {{ video_4 | video_tag: controls: false }}
+        <img src="{{ 'arrow-play-new.svg' | asset_url }}" class="play-button-new">
+        </div>
+      {% endif %}
+  </div>
+</section>
+
+<style>
+  .video-container{
+    position: relative;
+    display: flex;
+  }
+  
+  .play-button-new{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border: #fac8ca 3px solid;
+    border-radius: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+
+  .video-carousel-section-2{
+    margin: 0 -15px;
+    margin-bottom: 60px;
+    
+  }
+  .video-carousel-container-2{
+    padding: 0;
+    justify-content: center;
+  }
+
+  .video-carousel-container-2 video{
+    object-fit: contain;
+    width: 100%;
+    border-radius: 15px;
+    max-width: 500px;
+  }
+
+  @media screen and (min-width: 768px){
+    .video-carousel-section-2{
+      display: none;
+    }
+  }
+</style>
+
+<script>
+
+    
+    $('.video-carousel-container-2').slick({
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    centerMode: true,
+    centerPadding: '20px',
+    arrows: false
+  });
+  
+        let videos = document.querySelectorAll('.video-carousel-container-2 video')
+        videos.forEach(item=>{
+            let newThumbnail = item.getAttribute('poster'); 
+            if (newThumbnail.includes('_small')){ 
+                newThumbnail = newThumbnail.replace('_small',''); 
+                item.setAttribute('poster', newThumbnail)
+            }
+        });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const playButtons = document.querySelectorAll('.play-button-new');
+  
+  playButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const videoContainer = this.closest('.video-container');
+      const video = videoContainer.querySelector('video');
+
+      if (video.paused) {
+        video.controls = true; // Muestra los controles del video cuando se inicia
+        video.play();
+        this.style.display = 'none'; // Esconde el botón de play al reproducir
+      } else {
+        video.pause();
+      }
+
+      video.addEventListener('pause', () => {
+        // Aquí puedes agregar más lógica si lo deseas
+      });
+
+      video.addEventListener('ended', () => {
+        this.style.display = 'block'; // Muestra el botón de play cuando el video termina
+      });
+    });
+  });
+});
+
+</script>

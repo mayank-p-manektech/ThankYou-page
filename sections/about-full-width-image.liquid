@@ -1,0 +1,217 @@
+{% style %}
+    .full-width__overlay-{{ section.id }} .full-width__top-text {
+        color: {{ section.settings.top_text_color }};
+    }
+    .full-width__overlay-{{ section.id }} h3.full-width__title {
+        color: {{ section.settings.title_color }};
+    }
+    .full-width__overlay-{{ section.id }} .full-width__title .js-rotating {
+        color: {{ section.settings.title_color }};
+    }
+    .full-width__overlay-{{ section.id }} .full-width__bottom-text {
+        color: {{ section.settings.bottom_text_color }};
+    }
+    .full-width__overlay-{{ section.id }} .full-width__btn {
+        color: {{ section.settings.button_text_color }};
+        background-color: {{ section.settings.button_bg_color }};
+        border-color: {{ section.settings.button_border_color }};
+    }
+{% endstyle %}
+<div data-f="about-full-width-image.liquid" class="full-width__wrapper {% if section.settings.image_height == 'full' %}full-width__full-height{% endif %} full-width__wrapper-{{ section.id }} {{ section.settings.section_class }}" data-aos="fade-up" data-section-id="{{ section.id }}" data-section-type="full-width-overlay-section">
+    {% if section.settings.image != blank %}
+        {% assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img class="full-width__image {% if section.settings.image_mobile != blank %}full-width__image-desktop{% endif %} lazyload fade-in"
+        src="{{ section.settings.image | img_url: '300x' }}"
+        data-src="{{ img_url }}"
+        data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+        data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+        data-sizes="auto"
+        data-parent-fit="cover"
+        data-hero-image
+        alt="{{ section.settings.image.alt | escape }}"
+        style="object-position: {{ section.settings.image_position }}">
+    {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+
+    {% if section.settings.image_mobile != blank %}
+        {% assign img_url = section.settings.image_mobile | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+        <img class="full-width__image full-width__image-mobile lazyload fade-in"
+        src="{{ section.settings.image_mobile | img_url: '300x' }}"
+        data-src="{{ img_url }}"
+        data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+        data-aspectratio="{{ section.settings.image_mobile.aspect_ratio }}"
+        data-sizes="auto"
+        data-parent-fit="cover"
+        data-hero-image
+        alt="{{ section.settings.image_mobile.alt | escape }}">
+    {% endif %}
+    <div class="full-width__overlay full-width__overlay-{{ section.id }}">
+        <div class="wrapper full-width__align-wrapper position-{{ section.settings.layout }}">
+            <div class="full-width__text-wrapper {% if section.settings.slide_rotating_text != blank %}has-rotating-text{% endif %}">
+                <div class="full-width__top-text">
+                    {{ section.settings.top_text }}
+                </div>
+                <h3 class="full-width__title {% if section.settings.slide_rotating_text != blank %}has-rotating-text{% endif %}">
+                    {{ section.settings.title }}                   
+                    {% if section.settings.slide_rotating_text != blank %}
+                        <span class="rotating-wrapper">
+                            <div class="js-rotating">{{ section.settings.slide_rotating_text | escape }}</div>
+                        </span> 
+                    {% endif %}
+                </h3>
+                <div class="full-width__bottom-text">
+                    {{ section.settings.bottom_text }}
+                </div>
+                {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+                    <a href="{{ section.settings.button_link }}" class="full-width__btn btn">
+                        {{ section.settings.button_text | escape }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+    "name": "Full Width Image Overlay",
+    "class": "full-width-image-section",
+    "settings": [
+        {
+            "type": "select",
+            "id": "image_height",
+            "label": "Image Height",
+            "default": "adapt",
+            "options": [
+                {
+                    "value": "full",
+                    "label": "Full"
+                },
+                {
+                    "value": "adapt",
+                    "label": "Adapt"
+                }
+            ]
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Mobile Image"
+        },
+        {
+            "type": "text",
+            "id": "top_text",
+            "label": "Top Text"
+        },
+        {
+            "type": "color",
+            "id": "top_text_color",
+            "label": "Top Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title Color",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "slide_rotating_text",
+            "label": "Rotating Text"
+        },
+        {
+            "type": "text",
+            "id": "bottom_text",
+            "label": "Bottom Text"
+        },
+        {
+            "type": "color",
+            "id": "bottom_text_color",
+            "label": "Bottom Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+        },      
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text Color",
+            "default": "#000000"
+        }, 
+        {
+            "type": "color",
+            "id": "button_bg_color",
+            "label": "Button Background Color",
+            "default": "#ffffff"
+        }, 
+        {
+            "type": "color",
+            "id": "button_border_color",
+            "label": "Button Border Color",
+            "default": "#000000"
+        }, 
+        {
+            "type": "select",
+            "id": "layout",
+            "label": "Text alignment",
+            "default": "left",
+            "options": [
+                {
+                "value": "left",
+                "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "image_position",
+            "label": "Image alignment",
+            "default": "left",
+            "options": [
+                {
+                "value": "left",
+                "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "section_class",
+            "label": "Class"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Full Width Image",
+            "category": "Image"
+        }
+    ]
+}
+{% endschema %}

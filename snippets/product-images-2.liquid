@@ -1,0 +1,130 @@
+<section class="product-gallery-2 splide" id="main-carousel">
+  <div class="main-image-wrapper splide__track">
+    <div class="splide__arrows">
+      <button class="splide__arrow splide__arrow--prev">
+        <svg class="tw-fill-current tw-text-[#090909] hover:tw-text-[#9F3623]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M14.5351 20.025L15.2251 19.335L7.8901 12L15.2251 4.66502L14.5351 3.97502L6.8551 11.655L6.5251 12L6.8551 12.345L14.5351 20.025Z" fill="#090909"></path>
+        </svg>
+      </button>
+      <button class="splide__arrow splide__arrow--next">
+        <svg class="tw-fill-current tw-text-[#090909] hover:tw-text-[#9F3623]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M9.4649 3.97498L8.7749 4.66498L16.1099 12L8.7749 19.335L9.4649 20.025L17.1449 12.345L17.4749 12L17.1449 11.655L9.4649 3.97498Z" fill="#090909"></path>
+        </svg>
+      </button>
+    </div>    
+    <ul class="splide__list">
+      {% for media in product.media %}
+        <li class="main-image-item splide__slide">
+          {% case media.media_type %}
+            {% when 'image' %}
+              {{ media | image_url: width: 1000, height: 1000 | image_tag }}
+            {% when 'video' %}
+              {{ media | video_tag: controls: true }}
+          {% endcase %}
+        </li>
+      {% endfor %}      
+    </ul>
+  </div>
+</section>
+<section class="product-gallery-2-thumbs splide" id="thumbnail-carousel">
+  <div class="thumbs-wrapper splide__track">
+    <ul class="splide__list thumbs-list">      
+    {% for media in product.media %} 
+      {% case media.media_type %}
+        {% when 'image' %}
+          <li class="thumbs-item splide__slide">
+            {{ media | image_url: width: 1000, height: 1000 | image_tag }}
+          </li>
+        {% when 'video' %}
+          <li class="thumbs-item thumbs-video splide__slide">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            {{ media | video_tag: controls: true }}
+          </li>
+        {% endcase %}
+    {% endfor %}
+    </ul>
+    <div class="splide__arrows">
+      <button class="splide__arrow splide__arrow--prev">
+        <svg class="tw-fill-current tw-text-[#090909] hover:tw-text-[#9F3623]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M14.5351 20.025L15.2251 19.335L7.8901 12L15.2251 4.66502L14.5351 3.97502L6.8551 11.655L6.5251 12L6.8551 12.345L14.5351 20.025Z" fill="#090909"></path>
+        </svg>
+      </button>
+      <button class="splide__arrow splide__arrow--next">
+        <svg class="tw-fill-current tw-text-[#090909] hover:tw-text-[#9F3623]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M9.4649 3.97498L8.7749 4.66498L16.1099 12L8.7749 19.335L9.4649 20.025L17.1449 12.345L17.4749 12L17.1449 11.655L9.4649 3.97498Z" fill="#090909"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-gallery-2{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-gallery-2-thumbs{
+    overflow: hidden;
+    margin-top: 5px;
+    position: relative;
+  }
+
+  .main-image-item{
+    display: flex;
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+  }
+
+  .thumbs-item{
+    aspect-ratio: 1;
+    position: relative;
+    display: flex;
+  }
+
+  .main-image-item img, .thumbs-item img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .main-image-item video{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .swiper-main .swiper-next{
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .swiper-main .swiper-prev{
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .swiper-main:hover .swiper-next, .swiper-main:hover .swiper-prev{
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s;
+    background: #efefe9;
+  }
+
+  .thumbs-video video{
+    display: none;
+  }
+  
+</style>

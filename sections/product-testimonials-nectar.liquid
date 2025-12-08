@@ -1,0 +1,57 @@
+<div
+  data-f="product-testimonials-nectar.liquid"
+  class="wrapper"
+  data-aos="fade-up"
+  data-section-id="{{ section.id }}"
+  data-section-type="product-testimonials-nectar-section"
+  id="shopify-section-product-testimonials-nectar"
+>
+  <h3 class="product-testimonials-title">{{ section.settings.product_testimonials_header }}dd</h3>
+  <div class="testimonial-container">
+    {% for block in section.blocks %}
+      <div class="testimonial-sub-container">
+        <div class="product-testimonials-text">{{ block.settings.product_testimonials_text }}</div>
+        <div class="product-testimonials-author">{{ block.settings.product_testimonials_author }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name":"Product Testimonials Nec",
+    "class":"testimonial-section",
+    "max_blocks": 4,
+    "settings": [
+          {
+              "type":"text",
+              "id":"product_testimonials_header",
+              "label":"Section Header"
+          }
+      ],
+    "blocks": [
+      {
+      "type": "info",
+      "name": "Testimonial",
+      "settings": [
+          {
+              "type":"richtext",
+              "id":"product_testimonials_text",
+              "label":"Text"
+          },
+          {
+              "type":"text",
+              "id":"product_testimonials_author",
+              "label":"Author"
+          }
+      ]
+  }
+],
+  "presets": [
+    {
+      "name": "Product Testimonials Nec"
+    }
+  ]
+    
+  }
+{% endschema %}

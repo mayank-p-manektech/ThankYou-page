@@ -1,0 +1,30 @@
+<!-- /templates/page.liquid -->
+      <div class="section-hero section-hero-wholesale">
+        <img src="{{ 'wholesale.jpg' | asset_url }}" class="contact-img">
+        <div class="hero-content hero-wholesale">
+          <h1 class="only-desktop">Partner With Us</h1>
+          <h1 class="only-mobile">Partner With Us</h1>
+        </div>
+      </div>
+<div class="wholesale-wrapper">
+          {{ page.content }}
+</div>
+
+<style>
+  .wholesale-wrapper{
+    max-width: 930px;
+    margin: 0 auto;
+    padding: 0 15px;
+    margin-bottom: 40px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        mainContent.style.display = 'block'; // O la propiedad de CSS que prefieras.
+    }
+});
+
+</script>

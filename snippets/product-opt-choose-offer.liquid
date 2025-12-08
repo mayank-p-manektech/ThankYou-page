@@ -1,0 +1,346 @@
+<style>
+   .hide-class {display:none;}
+
+  .product-new-mist .product-offers-custom{
+    padding-top: 30px;
+  }
+
+  .single-option-radio label .option-label {
+      width: 35px;
+      height: 35px;
+      line-height: 47px;
+      font-size: 16px;
+  }
+  .product-new-mist .single-option-radio label .option-label {
+    width: 20px;
+    height: 20px;
+    line-height: 30px;
+    font-size: 16px;
+}
+  .product-new-mist .option-label:after {   
+    height: 9px;
+    width: 9px;
+}
+  .mist-offers .option-name-choose-offer .single-option-radio label {
+      padding: 8px;
+      border-radius: 10px;
+      width: 100%;
+  }
+ 
+  .product-new-mist .single-option-radio .offer-list input[type=radio]:checked+label .option-label:after, .single-option-radio .offer-list input[type=radio]:checked+label .option-default {
+    background-color: #fac8ca !important;   
+}
+
+  .single-option-radio input[type=radio]:checked+label .option-label{
+    background-color: #523d33 !important;
+    border-color: #523d33;
+  }
+  .option-oz {
+      color: #fac8ca;
+      font-weight: 500;
+      margin-top: 5px;
+      padding-left: 15px;
+      opacity: 1 !important;
+      /* display: none; */
+  }
+    #sec-2 .other-info {
+      position: absolute;
+      top: -25px;
+      right: 30px;
+  }
+  .mist-offers #sec-3.other-info .image.bottle-sm {
+      position: relative;
+      left: 0;
+      top: 0;
+  }
+
+  .mist-offers .other-info .img-container {
+      display: flex;
+  }
+  .mist-offers #sec-3.othefr-info .image.bottle-lg img {
+      height: 150px;
+      width: 100px;
+  }
+    #sec-3.other-info {
+      right: 60px;
+  }
+  .mist-offers #sec-1.other-info .image.bottle-sm {
+      position: relative;
+      left: -30px;
+      top: 10px;
+  }
+    .mist-offers .option-name-choose-offer .single-option-radio label[data-option="4 Fills 8oz"] {
+      float: right;
+      display: flex;
+      flex-direction: row;
+  }
+    .mist-offers .option-name-choose-offer .single-option-radio input[type=radio]:checked+label {
+      border: none;
+  }
+   .option-oz {
+      color: #523d33;
+      font-weight: 500;
+      font-size: 17px;
+      margin-top: 0px;
+  }
+    span.variant-offer {
+      color: #fac8ca;
+  }
+    .offer-list{
+      list-style:none;
+       margin: 0 0 15px -10px;
+    }
+    .offer-list li {
+      display: flex;
+      margin-bottom:0 !important;
+  }
+   .offer-list li .text-center{
+      margin-bottom:0 !important;
+  }
+    .other-info {
+      position: absolute;
+      top: -30px;
+      right: 30px;
+  }
+    .mist-offers .other-info .img-container{
+      height:unset;
+    }
+
+  .mist-offers .other-info .image.bottle-lg img {
+      height: 150px;
+      width: 190px;
+  }
+    .mist-offers .other-info .image.bottle-sm {
+      position: relative;
+      left: -30px;
+  }
+  .mist-offers .other-info .image.bottle-sm img {
+      height: 115px;
+      margin-top: 10px;
+  }
+  .offer-list label.text-center {
+      justify-content: start !important;
+      align-items: center !important;
+      flex-direction: row;
+  }
+  div#sec-1.other-info img {
+      height: 120px;
+  }
+  div#sec-1.other-info {
+      top: -50px;
+      right: 125px;
+  }
+    .single-option-radio .offer-list input[type=radio]:checked+label .option-label:after, .single-option-radio .offer-list input[type=radio]:checked+label .option-default {
+      background-color: #fff !important;
+      opacity: 1;
+  }
+  .option-label:after {
+      content: "";
+      display: block;
+      height: 1rem;
+      width: 1rem;
+      position: absolute;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transition: opacity 0.1s;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+  }
+  /* .single-option-radio label .option-label {
+      background-color: #523d33 !important;
+  } */
+  .mist_10oz .other-info {
+      position: absolute;
+      top: -25px;
+      right: 100px;
+  }
+  .mist_10oz .image.bottle-sm {
+      position: absolute;
+      top: 25px;
+      right: -45px;
+  }
+  .mist-offers .product-offers {
+    flex-direction: column;
+    padding-top: 0
+  }
+   
+  @media only screen and (min-width: 767px) {
+    .product-mist .mist-offers .option-name-choose-offer .single-option-radio label {
+      padding: 8px 8px 30px 8px;
+      }
+  }
+  @media only screen and (max-width: 600px) {
+  .option-label:after {
+      height: 9px;
+      width: 9px;
+  }
+   .single-option-radio input[type=radio]:checked+label .option-oz {
+    font-weight: 600;
+}
+  .single-option-radio .offer-list input[type=radio]:checked+label .option-label:after, .single-option-radio .offer-list input[type=radio]:checked+label .option-default {
+    background-color: #fac8ca !important;
+}
+  }
+</style>
+
+
+{% if option_name contains '|' %}
+  {% assign worlds = option_name | split: '|' %}
+  {% for word in worlds %}
+    {% if forloop.index == 1 %}
+      {% assign option_name = word %}
+    {% else %}
+      {% assign option_name = option_name | append: '<span class="pink">|' | append: word | append: '</span>' %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% assign current = product.selected_or_first_available_variant %}
+<label
+  class=" single-option-radio__label"
+  for="ProductSelect-option-{{ forloop.index0 }}"
+>
+  {{ option_name }}
+</label>
+{% if section.settings.product_selector == 'radio' %}
+  <fieldset
+    class="single-option-radio"
+    id="ProductSelect-option-{{ forloop.index0 }}"
+  >
+    <ul class="offer-list">
+      {% assign option_index = forloop.index %}
+      {% for value in option.values %}
+        {% assign variant_label_state = true %}
+        {% if product.options.size == 1 %}
+          {% unless product.variants[forloop.index0].available %}
+            {% assign variant_label_state = false %}
+          {% endunless %}
+        {% endif %}
+        {% assign newNameArray = value | remove: 'servings | ' | split: ' ' %}
+        {% for itemArray in newNameArray %}
+          {% if forloop.index == 1 %}
+            {% assign option_label = itemArray %}
+          {% endif %}
+          {% if forloop.index == 2 %}
+            {% assign option_oz = itemArray %}
+          {% endif %}
+          {% if forloop.index == 3 %}
+            {% assign option_ov = itemArray %}
+          {% endif %}
+          {% if forloop.last %}
+            {% assign option_oy = itemArray %}
+          {% endif %}
+        {% endfor %}
+        {% assign option_oy_number = option_oy | replace: "oz", "" | times: 1 %}
+        {% assign result = option_oy_number | divided_by: 2 %}
+        <li>
+          <input
+            type="radio"
+            {% if option.selected_value == value %}
+              checked="checked"
+            {% endif %}
+            {% unless variant_label_state %}
+              disabled="disabled"
+            {% endunless %}
+            value="{{ value | escape }}"
+            data-index="option{{ option_index }}"
+            data-option="{{ value | escape  }}"
+            data-oz="{{ result }}"
+            name="option{{ option.position }}"
+            class="custom-radio-button-variant single-option-selector__radio{% unless variant_label_state %} disabled{% endunless %}"
+            id="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}"
+          >
+
+          <label
+            for="ProductSelect-option-{{ option.name | handleize }}-{{ value | escape }}"
+            data-option="{{ value | escape  }}"
+            class="text-center"
+          >
+            <div class="option-label{% unless variant_label_state %} disabled{% endunless %}"></div>
+            <div class="option-oz">
+              {% if value == 'Rose Mist 2oz' -%}
+                {{- option_label }}
+                {{ option_oz -}}
+              {%- elsif value == '4 Fills 8oz' -%}
+                {{- option_label }}
+                {{ option_oz -}}
+              {%- else -%}
+                {{- option_label }}
+                {{ option_oz }}
+                {{ option_ov -}}
+              {%- endif %}
+              | <span class="variant-offer">{{ option_oy }}</span>
+                <input type="hidden" class="oz-unit" value="{{ option_oy | replace: "oz", "" }}">
+            </div>
+          </label>
+        </li>
+
+        {% if value == '4 Fills 8oz' %}
+          <div class="other-info" id="sec-2">
+            <div class="mist_8oz big-bottle-container">
+              <div class="image big-bottle">
+                <img src="{{ product.metafields.variant.bottle_lg }}">
+              </div>
+              <!--
+                <div class="image bottle-sm">
+                      <img  src="{{ product.metafields.variant.bottle_sm }}">
+                </div>
+              -->
+            </div>
+
+            <div class="dev-high-bg hide-class">
+              {{ product.metafields.variant.variant_info_8oz }}
+              {% include 'product-price-dev' %}
+            </div>
+          </div>
+        {% endif %}
+        {% if value == 'Rose Mist 2oz' %}
+          <div class="other-info hide-class" id="sec-1">
+            <div class="2oz_img img-container img-toz ">
+              <div class="image bottle-sm">
+                <img src="{{ product.metafields.variant.bottle_sm }}">
+              </div>
+              <div class="dev-high-bg hide-class">
+                {% include 'product-price-dev2' %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if value == 'Rose Mist Set 10oz' %}
+          <div class="other-info hide-class" id="sec-3">
+            <div class="mist_10oz big-bottle-container">
+              <div class="image big-bottle">
+                <img src="{{ product.metafields.variant.bottle_lg }}">
+              </div>
+              <div class="image bottle-sm">
+                <img src="{{ product.metafields.variant.bottle_sm }}">
+              </div>
+            </div>
+
+            <div class="dev-high-bg hide-class">
+              {{ product.metafields.variant.variant_info_10oz }}
+              {% include 'product-price-dev' %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </fieldset>
+{% else %}
+  <select
+    class="fogi single-option-selector__radio single-option-selector-{{ section.id }} product-form__input"
+    id="SingleOptionSelector-{{ forloop.index0 }}"
+    data-index="option{{ forloop.index }}"
+  >
+    {% for value in option.values %}
+      <option
+        value="{{ value | escape }}"
+        {% if option.selected_value == value %}
+          selected="selected"
+        {% endif %}
+      >
+        {{ value | escape }}
+      </option>
+    {% endfor %}
+  </select>
+{% endif %}

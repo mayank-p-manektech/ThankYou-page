@@ -1,0 +1,12 @@
+{% unless product.has_only_default_variant %}   
+    {% for option in product.options_with_values %}
+      {% if option.name == 'Choose Offer' %}
+        <div class="radio-wrapper js product-form__item small--text-center">
+            {% include 'product-opt-default' %}
+        </div>
+            {% elsif option.name contains 'Choose Quantity' %}
+                {% include 'product-opt-choose-qty' %}
+
+            {% endif %}
+    {% endfor %}
+{% endunless %}

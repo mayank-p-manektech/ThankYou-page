@@ -1,0 +1,79 @@
+<!-- /templates/blog.liquid -->
+{% paginate blog.articles by 50 %}
+  <div class="grid">
+    <div class="grid__item large--five-sixths push--large--one-twelfth">
+      <header class="section-header text-center">
+        <h1>
+          <img src="//cdn.shopify.com/s/files/1/0091/8444/4495/files/recipe_large.png?v=1584472116">High
+          <span class="pink-text">Vibe</span> Recipes
+        </h1>
+      </header>
+
+      <div class="klaviyo-form-Xv8LRL"></div>
+      <style>
+
+        .klaviyo-form-Xv8LRL {
+        	margin-top: -50px;
+        	margin-bottom: 50px;
+          }
+          @media (max-width: 768px) {
+        	.klaviyo-form-Xv8LRL {
+        		margin-top: 0px;
+        		margin-bottom: 50px;
+        	}
+          }
+      </style>
+
+      <div class="grid">
+        {% for article in blog.articles %}
+          {% assign article_content = article.excerpt_or_content %}
+
+          <article class="article grid__item large--one-half middle--one-third text-center">
+            {% unless article.image == blank %}
+              <div class="d-p">
+                <a class="article__featured-image-link" href="{{ article.url }}">
+                  <noscript>
+                    {{ article.image | img_url: '2048x2048' | img_tag: article.title | escape }}
+                  </noscript>
+                  <div
+                    class="article__featured-image-wrapper"
+                  >
+                    {% assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                    <img
+                      class="article__featured-image lazyload"
+                      src="{{ article.image | img_url: '300x300' }}"
+                      data-src="{{ img_url }}"
+                      data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ article.image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="{{ article.title | escape }}"
+                    >
+                  </div>
+                </a>
+              </div>
+            {% endunless %}
+
+            <h2 class="h3">
+              <a class="article__heading-link" href="{{ article.url }}">{{ article.title }}</a>
+            </h2>
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+    </div>
+  </div>
+{% endpaginate %}
+
+<script>
+	document.addEventListener("DOMContentLoaded", (event) => {
+		$("ul.site-nav > li.site-nav__item:nth-of-type(4)").ready(function () {
+			$("ul.site-nav > li.site-nav__item:nth-of-type(4)")[0].classList.add(
+				"site-nav--active"
+			);
+		});
+		// Highlights "Recipes" on the main menu, because its not working for some other reason
+	});
+</script>

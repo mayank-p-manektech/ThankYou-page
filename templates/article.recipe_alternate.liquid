@@ -1,0 +1,103 @@
+<!-- /templates/article.liquid -->
+{% comment %}
+  The contents of the article.liquid template can be found in /sections/article-template.liquid
+
+<div class="article-recipe">
+{% section 'article-template' %}
+  
+<!-- Share This Buttons -->
+<div class="sharethis-inline-share-buttons"></div> 
+  
+<h3 class="more-recipes">More Recipes</h3>
+{% include 'relatedblogs' %}
+</div>
+{% endcomment %}
+
+<!-- /templates/article.liquid -->
+{% comment %}
+  The contents of the article.liquid template can be found in /sections/article-template.liquid
+{% endcomment %}
+
+ 
+
+<div class="article-recipe">
+
+
+{% section 'article-template' %}
+  
+<!-- Share This Buttons -->
+<div class="sharethis-inline-share-buttons"></div> 
+</div>
+<br><br><br><br>
+
+ {% section "featured-recipes" %}
+
+<script>
+	document.addEventListener("DOMContentLoaded", (event) => {
+		$("ul.site-nav > li.site-nav__item:nth-of-type(4)").ready(function () {
+			$("ul.site-nav > li.site-nav__item:nth-of-type(4)")[0].classList.add(
+				"site-nav--active"
+			);
+		});
+		// Highlights "Recipes" on the main menu, because its not working for some other reason
+	});
+</script>
+
+
+<style>
+	header.section-header {
+		margin-bottom: 0px !important;
+	}
+	.main-recipe-content {
+		display: flex;
+		flex-flow: row nowrap;
+	}
+	.main-recipe-content .section-left {
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.main-recipe-content .section-left img {
+		width: 100%;
+		margin: 0 !important;
+	}
+	.main-recipe-content .section-right {
+		width: 50%;
+		display: flex;
+		flex-flow: column nowrap;
+		padding: 0 15px;
+	}
+	.main-recipe-content .section-right h4 {
+		font-weight: bold;
+		margin-bottom: 1em;
+	}
+	.main-recipe-content .section-right .description {
+	}
+	.main-recipe-content .section-right .ingredients {
+	}
+	.main-recipe-content .section-right .directions {
+	}
+	@media (max-width: 768px) {
+		.main-recipe-content {
+			display: flex;
+			flex-flow: column nowrap;
+            width:80%;
+            margin: auto;
+		}
+		.main-recipe-content .section-left {
+			width: 100%;
+		}
+		.main-recipe-content .section-right {
+			width: 100%;
+		}
+		.main-recipe-content .section-left img {
+			width: 100%;
+			margin: 0 30px !important;
+		}
+	}
+	#shopify-section-featured-recipes .show-more-btn {
+		padding-bottom: 15px;
+	}
+</style>
+

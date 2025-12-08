@@ -1,0 +1,17 @@
+{% assign default_variant_id = product.first_available_variant.id %}
+
+{% if product.metafields.default_variant.default_variant %}
+    {% assign default_variant_index = product.metafields.default_variant.default_variant %}  
+    {% for variant in product.variants %}
+        {% if forloop.index == default_variant_index %}
+            {% if variant.available %}
+                {% assign default_variant_id = variant.id %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+{% for variant in product.variants %}
+    {% if variant.id == default_variant_id %}
+        <div class="product-price-dev small--text-center">{{ variant.metafields.price_info.info }}</div> 
+    {% endif %}
+{% endfor %}

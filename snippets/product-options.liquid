@@ -1,0 +1,7 @@
+{% unless product.has_only_default_variant %}   
+    {% for option in product.options_with_values %}
+        <div class="radio-wrapper js product-form__item small--text-center">
+            {% include 'product-opt-default' %}
+        </div>
+    {% endfor %}
+{% endunless %}

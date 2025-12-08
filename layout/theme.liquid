@@ -1,0 +1,437 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11562190715"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-11562190715');
+    </script>
+    <!-- Event snippet for Purchase conversion page -->
+    <script>
+      gtag('event', 'conversion', { 'send_to': 'AW-11562190715/ibe7COyw7IcaEPuOpIkr', 'value': 1.0, 'currency': 'USD', 'transaction_id': '' });
+    </script>
+
+    {%- render 'ecom_header' -%}
+
+    <!-- Basic page needs ================================================== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    {% if settings.favicon %}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {% endif %}
+
+    <!-- Title and description ================================================== -->
+    {% comment %}
+      <title>
+      {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+      </title>
+    {% endcomment %}
+
+    {% if page_description %}
+      {% comment %}<meta name="description" content="{{ page_description | escape }}">{% endcomment %}
+    {% endif %}
+
+    <meta name="facebook-domain-verification" content="brtncoh3wvqbn8c3vo0maqw8ih0qqb">
+
+    <!-- Helpers ================================================== -->
+    {% include 'social-meta-tags' %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+    <style>
+            .section-hero .hero-content h1{
+        font-family: 'just lovely'
+      }
+
+            .contact-wrapper{
+              max-width: 930px;
+              width: 100%;
+              padding: 0 15px;
+              margin: 0 auto 40px;
+            }
+    </style>
+    <link
+      rel="preload"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    >
+    <noscript
+      ><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    ></noscript>
+
+    <!-- CSS ================================================== -->
+    {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'devst-styles.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'custom_style.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+    <!-- Sections ================================================== -->
+    <script>
+      window.theme = window.theme || {};
+      theme.strings = {
+        zoomClose: {{ "products.zoom.close" | t | json }},
+        zoomPrev: {{ "products.zoom.prev" | t | json }},
+        zoomNext: {{ "products.zoom.next" | t | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        addressError: {{ 'home_page.map.address_error' | t | json }},
+        addressNoResults: {{ 'home_page.map.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'home_page.map.address_query_limit_html' | t | json }},
+        authError: {{ 'home_page.map.auth_error_html' | t | json }},
+        cartEmpty: {{ 'cart.general.empty' | t | json }},
+        cartCookie: {{ 'cart.general.cookies_required' | t | json }},
+        cartSavings: {{ 'cart.general.savings_html' | t: savings: '[savings]' | json }}
+      };
+      theme.settings = {
+        cartType: {{ settings.cart_type | json }},
+        gridType: {{ settings.collection_products_grid | json }}
+      };
+    </script>
+
+    <!-- Header hook for plugins ================================================== -->
+    {% capture h_content %}
+    {{ content_for_header }}
+  {% endcapture %}
+
+    {{
+      h_content
+      | remove: '"https:\/\/saas-static.massgenie.com\/web\/widget\/js\/minify\/mg-js-powerbuy-plugin.min.js?shop=rosenectar.myshopify.com","https:\/\/saas-static.massgenie.com\/web\/recom\/dist\/main.js?shop=rosenectar.myshopify.com",'
+    }}
+
+    {% comment %}
+      If you store has customer accounts disabled, you can remove the following JS file
+    {% endcomment %}
+    {% if request.page_type contains 'customers/' %}
+    {% endif %}
+
+    <script>
+      var scaaffCheck = false;
+    </script>
+    {{ 'sca_affiliate.js' | asset_url | script_tag }}
+
+    <!-- Hotjar Tracking Code for https://www.drinkpurerose.com/ -->
+    {% comment %}
+      <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:2230577,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      </script>
+    {% endcomment %}
+
+    {% include 'mg-tracking-script' %}
+    {% include 'ot-cookies' %}
+    <script>
+      (function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const hasReferrer = urlParams.has("referrer");
+    
+        if (!hasReferrer) {
+          const klaviyoScript = document.createElement("script");
+          klaviyoScript.src = "https://static.klaviyo.com/onsite/js/JYpXXZ/klaviyo.js?company_id=JYpXXZ";
+          klaviyoScript.async = true;
+          document.head.appendChild(klaviyoScript);
+    
+          const inlineInit = document.createElement("script");
+          inlineInit.innerHTML = `!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();`;
+          document.head.appendChild(inlineInit);
+        }
+      })();
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <meta name="google-site-verification" content="a5W04M5JJxVI-RraN0vHR68uI8OR2uwYkLwVGV61rZY">
+  </head>
+
+  {% comment %}
+    Add the page template as a class for easy page or template specific styling.
+  {% endcomment %}
+  <body
+    id="{{ page_title | handle }}"
+    class="{% if template contains 'page' %}dev-page-body{% endif %} {% if customer %}customer-logged-in {% endif %}template-{{ request.page_type | handle }} {{ template | replace: '.', '-' | handle }}"
+  >
+    <input type="hidden" id="pagetitle" value="{{ page_title | handle }}">
+    {% section 'header' %}
+
+    <div id="CartDrawer" class="drawer drawer--right drawer--has-fixed-footer">
+      <div class="drawer__fixed-header">
+        <div class="drawer__header">
+          <div class="drawer__title">{{ 'cart.general.title' | t }}</div>
+          <div class="drawer__close">
+            <button type="button" class="icon-fallback-text drawer__close-button js-drawer-close">
+              <span class="icon icon-x" aria-hidden="true"></span>
+              <span class="fallback-text">{{ 'cart.general.close_cart' | t }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="drawer__inner">
+        <div id="CartContainer" class="drawer__cart"></div>
+      </div>
+    </div>
+
+    <div id="PageContainer" class="page-container">
+      <main class="main-content" role="main">
+        {% unless request.page_type == 'index'
+          or request.page_type == 'product'
+          or template contains 'about'
+          or template contains 'whats-inside'
+          or template.suffix == 'recipe_alternate'
+        %}
+          <div
+            {% if template contains 'wholesale' %}
+            {% elsif template contains 'contact' %}
+              class="contact-wrapper"
+            {% else %}
+              class="wrapper"
+            {% endif %}
+          >
+        {% endunless %}
+        {{ content_for_layout }}
+        {% unless request.page_type == 'index'
+          or request.page_type == 'product'
+          or template contains 'about'
+          or template.suffix == 'recipe_alternate'
+        %}
+          </div>
+        {% endunless %}
+      </main>
+
+      {% include 'mg-recommend' %}
+      {% section 'footer' %}
+    </div>
+
+    {% comment %}
+      Template-specific js
+    {% endcomment %}
+    <script>
+      {% if resetPassword %}
+      $(function () {
+        timber.initCache();
+        timber.resetPasswordSuccess();
+      });
+      {% endif %}
+    </script>
+
+    {% comment %}
+      Ajaxify your cart with this plugin.
+      Documentation:
+        - http://shopify.com/timber#ajax-cart
+    {% endcomment %}
+    {% if settings.cart_type == 'drawer' %}
+      {% include 'ajax-cart-template' %}
+    {% endif %}
+
+    {% if request.page_type == 'product' or request.page_type == 'index' %}
+      <script>
+        // Override default values of shop.strings for each template.
+        // Alternate product templates can change values of
+        // add to cart button, sold out, and unavailable states here.
+        theme.productStrings = {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }}
+        }
+      </script>
+    {% endif %}
+
+    <div id="SearchModal" class="mfp-hide">
+      {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--modal' %}
+    </div>
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+      <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
+      <li id="a11y-slideshow-info">{{ 'home_page.slideshow.navigation_instructions' | t }}</li>
+    </ul>
+
+    <!-- ==================================================================== -->
+    <script type="text/javascript">
+      /* <![CDATA[ */
+      (function () {
+        if (window.voyage) return;
+        window.voyage = {q: []};
+        var fns = ['init', 'track'];
+        for (var i = 0; i < fns.length; i++) {
+          (function (fn) {
+            window.voyage[fn] = function () {
+              this.q.push([fn, arguments]);
+            }
+          })(fns[i])
+        }
+      })();
+      voyage.init('3be10a38e7', {popup: true});
+      /* ]]> */
+    </script>
+    <script async src="https://assets.voyagetext.com/voyage.production.js"></script>
+
+    {% include 'booster-seo' %}
+
+    {{ 'jquery-3.7.1.min.js' | asset_url | script_tag }}
+    <script
+      type="text/javascript"
+      src="https://platform-api.sharethis.com/js/sharethis.js#property=5e7ccd681152e800146da513&product=inline-share-buttons"
+      async="async"
+    ></script>
+
+    <script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script>
+
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    <script>
+        // Hide Header on on scroll down
+      var didScroll;
+      var lastScrollTop = 0;
+      var delta = 3;
+      var navbarHeight = $('header').outerHeight();
+
+      $(window).scroll(function(event){
+          didScroll = true;
+      });
+
+      setInterval(function() {
+          if (didScroll) {
+               hasScrolled();
+              didScroll = false;
+          }
+      }, 250);
+
+      function hasScrolled() {
+          var st = $(this).scrollTop();
+
+          // Make sure they scroll more than delta
+          if(Math.abs(lastScrollTop - st) <= delta)
+              return;
+
+          // If they scrolled down and are past the navbar, add class .nav-up.
+          // This is necessary so you never see what is "behind" the navbar.
+          if (st > lastScrollTop && st > navbarHeight){
+              // Scroll Down
+              $('.header-container, header').removeClass('nav-down').addClass('nav-up');
+          }else if (st + $(window).height() === navbarHeight){
+              // Scroll none
+              $('.header-container, header').removeClass('nav-down').addClass('head-top');
+          } else {
+              // Scroll Up
+              if(st + $(window).height() < $(document).height()) {
+                  $('.header-container, header').removeClass('nav-up').addClass('nav-down');
+              }
+          }
+
+          lastScrollTop = st;
+      }
+    </script>
+    <!--
+      <script type="text/javascript" id="social_ocean_parent_script">
+        var shopifyProductId = "{{product.id}}"; console.log("product ", shopifyProductId); if (shopifyProductId != null && shopifyProductId != undefined && shopifyProductId != "") {!function (t) {console.log("so_root:",document.getElementById("so_root"));var e = document.getElementById("social_ocean_parent_script");let s = `social_ocean_script_${(Math.random() + 1).toString(36).substring(7)})`;var r = t.createElement("SCRIPT");r.setAttribute("charset", "utf-8"),r.type = "text/javascript",r.async = !0,r.id = s,r.src = `https://socialocean.co/api/widget.js?page=product&widget_type=horizontal_recommendations&widget_id=${s}&shopify_product_id=${shopifyProductId}`,e.parentNode.insertBefore(r, e.nextSibling)}(document);}
+      </script>
+    -->
+    <script>
+      $(document).ready(function () {
+            // var clickCount = 0;
+            // $("#g-btn").click(function(){
+            //     clickCount = (clickCount == 2) ? 0:clickCount;
+            //     if(clickCount == 0){
+            //         // alert("First Click");
+            //        $("#pop-buttons").addClass("show_pop_buttons").css('display','block');
+            //       $(".get-yours_heroimage").css('display','none');
+            //     }else if(clickCount == 1){
+            //         // alert("Second Click");
+            //       $("#pop-buttons").css('display','none');
+
+            //     }
+            //     clickCount++;
+
+            // });
+
+        //mobile pop buttons function for hero banner image
+          //  $("#g-btn").click(function(){
+          //       $("#pop-buttons").addClass("show_pop_buttons").css('display','block');
+          //       $(".get-yours_heroimage").css('display','none');
+          // });
+
+         // $(document).mouseup(function (e) {
+         //    if ($(e.target).
+         //        closest(".pop_buttons_hero").
+         //        length=== 0) {
+         //        $(".pop_buttons_hero").hide();
+         //        $(".get-yours_heroimage").css('display','block');
+         //        $(".get-yours_heroimage").css('margin-left','57px');
+         //    }
+         //  });
+        //mobile pop function ends here
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    {{ 'custom_scripts.js' | asset_url | script_tag }}
+    {{ 'devst-scripts.js' | asset_url | script_tag }}
+    {{ 'modernizr.min.js' | asset_url | script_tag }}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    <script src="{{ 'product-customization.js' | asset_url }}" defer="defer"></script>
+
+    {% include 'carro' %}
+
+    <!-- Back in Stock helper snippet -->
+    {% render 'back-in-stock-helper' %}
+    <!-- End Back in Stock helper snippet -->
+
+    {% include 'mg-powerbuy-common-data' %}
+    {%- render 'ecom_footer' -%}
+  </body>
+</html>
+
+<script>
+  window.addEventListener('load', function() {
+  var _learnq = window._learnq || [];
+  function addedToCart() {
+   fetch(`${window.location.origin}/cart.js`)
+   .then(res => res.clone().json().then(data => {
+    var cart = {
+      total_price: data.total_price/100,
+      $value: data.total_price/100,
+      total_discount: data.total_discount,
+      original_total_price: data.original_total_price/100,
+      items: data.items
+    }
+    if (item !== 'undefined') {
+      cart = Object.assign(cart, item)
+    }
+    if (klAjax) {
+       _learnq.push(['track', 'Added to Cart', cart]);
+       klAjax = false;
+      }
+   }))
+  };
+  (function (ns, fetch) {
+    ns.fetch = function() {
+      const response = fetch.apply(this, arguments);
+      response.then(res => {
+        if (`${window.location.origin}/cart/add.js`
+          .includes(res.url) && res.url !== '') {
+              addedToCart()
+        }
+      });
+      return response
+     }
+  }(window, window.fetch));
+  var klAjax = true;
+  var atcButtons = document.querySelectorAll("form[action*='/cart/add'] button[type='submit']");
+  for (var i = 0; i < atcButtons.length; i++) { 
+    atcButtons[i].addEventListener("click", function() {
+      if (klAjax) {
+        _learnq.push(['track', 'Added to Cart', item]);
+        klAjax = false;
+      }
+    })
+  }
+  });
+</script>

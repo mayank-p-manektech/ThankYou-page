@@ -1,0 +1,19 @@
+{% assign default_variant_id = product.first_available_variant.id %}
+
+{% if product.metafields.default_variant.default_variant %}
+    {% assign default_variant_index = product.metafields.default_variant.default_variant %}  
+    {% for variant in product.variants %}
+        {% if forloop.index == default_variant_index %}
+            {% if variant.available %}
+                {% assign default_variant_id = variant.id %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<div class="product-additional-prices">
+  <div class="product-price-per-bottle">
+    <span class="old-ppb"></span>
+    <span class="new-ppb"></span>
+    <span class="unit-n">/ 2oz</span>
+  </div>
+</div>

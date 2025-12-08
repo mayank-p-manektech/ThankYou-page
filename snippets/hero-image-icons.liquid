@@ -1,0 +1,40 @@
+{% case section.blocks.size %}
+{% when 0 %}
+{% when 1 %}
+    {% assign column_width = '' %}
+{% when 2 %}
+    {% comment %}
+     {% assign column_width = 'one-half' %}
+    {% endcomment %}
+    {% assign column_width = 'one-third' %}
+{% when 3 %}
+    {% assign column_width = 'one-third' %}
+{% when 4 %}
+    {% assign column_width = 'one-quarter' %}
+{% endcase %}
+<div class="product-icons">
+    <div class="grid">
+    {% for block in section.blocks %}
+        <div class="grid__item {{ column_width }} text-center">
+            {% if block.settings.image != blank %}
+                <noscript>
+                    {{ block.settings.image | img_url: '1000x1000' | img_tag: block.settings.image.alt, 'feature-row__image-no-js' }}
+                </noscript>
+                <a href="{{ block.settings.link }}" class="feature-icon__image-wrapper">
+                {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <img class="feature-icon__image lazyload"
+                    src="{{ block.settings.image | img_url: '1000x10+00' }}"
+                    data-src="{{ img_url }}"
+                    data-widths="[200, 360, 540, 720]"
+                    data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="{{ block.settings.image.alt | escape }}">
+            </a>
+            {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+         
+        </div>
+    {% endfor %}
+    </div>
+</div>

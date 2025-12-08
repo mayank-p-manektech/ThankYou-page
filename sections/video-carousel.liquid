@@ -1,0 +1,227 @@
+<section class="video-carousel-section" id="video-carousel-section">
+  <div class="video-carousel-container">
+    {% for block in section.blocks %}
+      {% if block.type == 'Video' %}
+        <div class="video-container">
+          {{ block.settings.video-item | video_tag: controls: false }}
+           <img src="{{ 'arrow-play-new.svg' | asset_url }}" class="play-button-new">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="Popup_video__product" style="display: none;">
+  <div class="popup-content">
+    <span class="popup-close">&times;</span>
+    <video id="popup-video" controls></video>
+  </div>
+</div>
+</section>
+
+{% schema %}
+{
+  "name": "Mobile Video Carousel",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "Video",
+      "name": "video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video-item",
+          "label": "Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile Video Carousel"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+    .video-container{
+    position: relative;
+  }
+
+  .popup-content{
+    display: flex;
+  }
+  
+  .play-button-new{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border: #fac8ca 3px solid;
+    border-radius: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+.video-carousel-container {
+  display: none;
+  padding: 40px 0 0px;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 80px;
+}
+
+.video-carousel-container video {
+  object-fit: contain;
+  width: 100%;
+  border-radius: 40px;
+  max-width: 325px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.popup-close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  color:#fac8ca;
+  cursor: pointer;
+}
+
+  .slick-initialized .slick-slide{
+    margin: 0 5px;
+  }
+
+@media screen and (min-width: 768px) {
+  .video-carousel-container {
+      max-width: 1000px;
+  }
+}
+
+  @media screen and (max-width: 768px){
+    .video-carousel-container video {
+      border-radius: 20px;
+      max-width: 500px;
+    }
+  }
+{% endstylesheet %}
+
+<script>
+$(document).ready(function() {
+  $('.video-carousel-container').slick({
+    infinite: true,
+    autoplay: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    centerPadding: '20px',
+    dots: true,
+    arrows: false,
+    centerMode: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: '20px',
+          infinite: false
+        }
+      }
+    ]
+  });
+  
+  let videos = document.querySelectorAll('.video-carousel-container video');
+  videos.forEach(item => {
+    let newThumbnail = item.getAttribute('poster'); 
+    if (newThumbnail && newThumbnail.includes('_small')) { 
+      newThumbnail = newThumbnail.replace('_small', ''); 
+      item.setAttribute('poster', newThumbnail);
+    }
+  });
+});
+
+    $('.video-carousel-container').on('init', function(event, slick){
+    // Muestra el contenedor después de que Slick se haya cargado
+    $('.video-carousel-section').css('display', 'block');
+  });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var playButtons = document.querySelectorAll('.play-button-new');
+    var popup = document.querySelector('.Popup_video__product');
+    var popupVideo = document.getElementById('popup-video');
+    var closeButton = document.querySelector('.popup-close');
+
+    playButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var videoContainer = this.closest('.video-container');
+            var video = videoContainer.querySelector('video');
+            var videoSrc = video.querySelector('source').getAttribute('src');
+
+            if (window.innerWidth > 768) {
+                // Mostrar el pop-up y cargar el video en desktop
+                console.log('Video source (desktop):', videoSrc);
+                if (videoSrc) {
+                    popup.style.display = 'flex';
+                    popupVideo.src = videoSrc;
+                    popupVideo.controls = true; // Asegúrate de que los controles estén visibles
+                    popupVideo.play().catch(function (error) {
+                        console.error('Error playing video:', error);
+                    });
+
+                    // Ocultar el botón de play
+                    this.style.display = 'none';
+                } else {
+                    console.error('No video source found');
+                }
+            } else {
+                // Reproducir el video en el contenedor en dispositivos móviles
+                console.log('Video source (mobile):', videoSrc);
+                if (videoSrc) {
+                    video.src = videoSrc;
+                    video.controls = true;
+                    video.play().catch(function (error) {
+                        console.error('Error playing video on mobile:', error);
+                    });
+
+                    video.poster = ''; // Ocultar el póster
+                    this.style.display = 'none';
+                } else {
+                    console.error('No video source found (mobile)');
+                }
+            }
+        });
+    });
+
+    // Cerrar el pop-up
+    closeButton.addEventListener('click', function () {
+        popup.style.display = 'none';
+        popupVideo.pause();
+        popupVideo.src = ''; // Limpia el src para detener el video
+        playButtons.forEach(function (button) {
+            button.style.display = 'block'; // Mostrar el botón de play nuevamente
+        });
+    });
+
+    // Cerrar el pop-up al hacer clic fuera del video
+    popup.addEventListener('click', function (event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+            popupVideo.pause();
+            popupVideo.src = ''; // Limpia el src para detener el video
+            playButtons.forEach(function (button) {
+                button.style.display = 'block'; // Mostrar el botón de play nuevamente
+            });
+        }
+    });
+
+    // Asegúrate de que el póster se oculta cuando el video se reproduce
+    popupVideo.addEventListener('play', function () {
+        this.poster = ''; // Ocultar el póster
+    });
+});
+</script>
+
+
+
+
+

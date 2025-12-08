@@ -1,0 +1,83 @@
+<div data-f="product-faq.liquid" id="section-faq" class="wrapper aos-init">
+  <div class="container">
+    <div class="faqpage">
+      <div class="section-header text-center">
+        <p class="faqs_title"> {{ section.settings.faq-main-title }} </p>
+      </div>
+
+      {% for block in section.blocks %}
+        <div class="panel_content panel-default">
+          <div class="accordion pannel_head" id="section{{ forloop.index }}"><a>{{ block.settings.faq-title }}</a><span></span></div>
+          <div class="pannel_desc">
+              <p>{{ block.settings.faq-desc }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ Blocks",
+	"max_blocks": 12,
+  "settings": [
+    {
+      "id": "faq-main-title",
+      "type": "text",
+      "label": "Heading",
+      "default": "FAQ"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "select",
+      "name": "Add FAQ",
+      "settings":[
+        {
+          "id": "faq-title",
+          "type": "text",
+          "label": "FAQ Heading",
+          "default": "Lorem Ipsum"
+        },
+        {
+          "id": "faq-desc",
+          "type": "textarea",
+          "label": "FAQ Description",
+		      "default": "<p>Lorem Ipsum Dollor sit Ammet</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Blocks",
+      "category": "FAQ",
+      "blocks": [
+        {
+          "type": "select"
+        },
+        {
+          "type": "select"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+<script type="text/javascript">
+  window.addEventListener('load', function() {
+    $('.accordion').accordion({
+        speed: 300
+    });
+  });
+</script>
+

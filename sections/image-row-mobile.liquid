@@ -1,0 +1,132 @@
+<div data-f="image-section-mist.liquid" class="{{ section.settings.section_class }} large--hide medium--hide small--show" data-aos="fade-left">
+  <div class="small--text-center">
+    <div class="page-width feature-row feature-row-mobile">
+      {% capture image_layout %}
+        <div class="feature-row__item">
+          {% if section.settings.image != blank %}
+            <noscript>
+              {{ section.settings.image | img_url: '600x600' | img_tag: section.settings.image.alt, 'feature-row__image-no-js' }}
+            </noscript>
+            <div
+                class="feature-row__image-wrapper"
+                style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;">
+              {% assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <img class="feature-row__image lazyload"
+                   src="{{ section.settings.image | img_url: '300x300' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                   data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ section.settings.image.alt | escape }}">
+            </div>
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+      {% endcapture %}
+
+      <div class="feature-row">
+        {{ image_layout }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": {
+    "da": "Billede med tekst",
+    "de": "Bild mit Text",
+    "en": "Image with text mobile",
+    "es": "Imagen con texto",
+    "fi": "Kuva tekstillä",
+    "fr": "Image avec texte",
+    "hi": "टेक्स्ट वाली इमेज",
+    "it": "Immagine con testo",
+    "ja": "テキスト付き画像",
+    "ko": "텍스트 포함 이미지",
+    "ms": "Imej dengan teks",
+    "nb": "Bilde med tekst",
+    "nl": "Afbeelding met tekst",
+    "pt-BR": "Imagem com texto",
+    "pt-PT": "Imagem com texto",
+    "sv": "Bild med text",
+    "th": "รูปภาพพร้อมข้อความ",
+    "zh-CN": "带文本的图片",
+    "zh-TW": "附文字的圖片"
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": {
+        "da": "Billede",
+        "de": "Bild",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "da": "Billede med tekst",
+        "de": "Bild mit Text",
+        "en": "Image with text mobile",
+        "es": "Imagen con texto",
+        "fi": "Kuva tekstillä",
+        "fr": "Image avec texte",
+        "hi": "टेक्स्ट वाली इमेज",
+        "it": "Immagine con testo",
+        "ja": "テキスト付き画像",
+        "ko": "텍스트 포함 이미지",
+        "ms": "Imej dengan teks",
+        "nb": "Bilde med tekst",
+        "nl": "Afbeelding met tekst",
+        "pt-BR": "Imagem com texto",
+        "pt-PT": "Imagem com texto",
+        "sv": "Bild med text",
+        "th": "รูปภาพพร้อมข้อความ",
+        "zh-CN": "带文本的图片",
+        "zh-TW": "附文字的圖片"
+      },
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

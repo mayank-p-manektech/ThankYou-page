@@ -1,0 +1,351 @@
+{% comment %} =================================================================
+  1. ENCONTRAR DATOS CLAVE DE VARIANTE
+================================================================= {% endcomment %}
+{% assign packs_option = null %}
+{% assign packs_option_position = 0 %}
+{% for option in product.options_with_values %}
+  {% if option.name == 'Value Packs' or option.name == 'Choose Quantity' %}
+    {% assign packs_option = option %}
+    {% assign packs_option_position = forloop.index %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} 
+  Bandera para marcar si una opción Autoship es por defecto (el 25% lo es). 
+  Esto asegura que el radio de BUY ONCE no se marque por defecto.
+{% endcomment %}
+{% assign default_autoship_exists = true %} 
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div class="custom-subscription-widget-container" data-packs-position="{{ packs_option_position }}" data-form-id="{{ product_form_id }}">
+  
+  <div class="subscription-options-list">
+    
+    {% comment %} =================================================================
+      2. AUTOSHIP OPCIONES (RENDERIZADAS UNA POR UNA)
+    ================================================================= {% endcomment %}
+    
+    {% comment %} --- AUTOSHIP 11% (1-Pack, 1 mes) --- {% endcomment %}
+    {% assign plan_id = 6361841883 %}
+    {% assign is_default = false %}
+    {% assign best_deal = false %}
+    <label for="purchase-option-{{ plan_id }}" 
+           class="purchase-option-label {% if is_default %}is-selected is-default{% endif %}">
+      <div class="purchase-option-wrapper">
+        <div class="purchase-option-content">
+          <input
+            type="radio"
+            id="purchase-option-{{ plan_id }}"
+            name="purchase_option"
+            value="subscription-{{ plan_id }}"
+            data-selling-plan-id="{{ plan_id }}"
+            data-pack-value="1-Pack"
+            {% if is_default %}checked{% endif %}
+          >
+          <span class="main-label">Autoship</span>
+          {% if best_deal %}<span class="best-deal-tag">Best deal</span>{% endif %}
+          <span class="price-info" data-price-target="{{ plan_id }}">
+            <s class="compare-at-price-display"></s>
+            <span class="current-price-display"></span> 
+          </span>
+        </div>
+      </div>
+      <p class="subscription-details-text"><strong>1-Pack,</strong> delivered every month</p>
+      <div class="shipping-details-container"><p class="shipping-details-text">cancel anytime</p></div>
+    </label>
+
+    {% comment %} --- AUTOSHIP 16% (2-Pack, 2 meses) --- {% endcomment %}
+    {% assign plan_id = 6361874651 %}
+    {% assign is_default = false %}
+    {% assign best_deal = false %}
+    <label for="purchase-option-{{ plan_id }}" 
+           class="purchase-option-label {% if is_default %}is-selected is-default{% endif %}">
+      <div class="purchase-option-wrapper">
+        <div class="purchase-option-content">
+          <input
+            type="radio"
+            id="purchase-option-{{ plan_id }}"
+            name="purchase_option"
+            value="subscription-{{ plan_id }}"
+            data-selling-plan-id="{{ plan_id }}"
+            data-pack-value="2-Pack"
+            {% if is_default %}checked{% endif %}
+          >
+          <span class="main-label">Autoship</span>
+          {% if best_deal %}<span class="best-deal-tag">Best deal</span>{% endif %}
+          <span class="price-info" data-price-target="{{ plan_id }}">
+            <s class="compare-at-price-display"></s>
+            <span class="current-price-display"></span> 
+          </span>
+        </div>
+      </div>
+      <p class="subscription-details-text"><strong>2-Pack,</strong> delivered every 2 months</p>
+      <div class="shipping-details-container"><p class="shipping-details-text">free shipping</p><p class="shipping-details-text">cancel anytime</p></div>
+    </label>
+
+    {% comment %} --- AUTOSHIP 25% (3-Pack, 3 meses) - DEFAULT/BEST DEAL --- {% endcomment %}
+    {% assign plan_id = 6361907419 %}
+    {% assign is_default = true %}
+    {% assign best_deal = true %}
+    <label for="purchase-option-{{ plan_id }}" 
+           class="purchase-option-label {% if is_default %}is-selected is-default{% endif %}">
+      <div class="purchase-option-wrapper">
+        <div class="purchase-option-content">
+          <input
+            type="radio"
+            id="purchase-option-{{ plan_id }}"
+            name="purchase_option"
+            value="subscription-{{ plan_id }}"
+            data-selling-plan-id="{{ plan_id }}"
+            data-pack-value="3-Pack"
+            {% if is_default %}checked{% endif %}
+          >
+          <span class="main-label">Autoship</span>
+          {% if best_deal %}<span class="best-deal-tag">Best deal</span>{% endif %}
+          <span class="price-info" data-price-target="{{ plan_id }}">
+            <s class="compare-at-price-display"></s>
+            <span class="current-price-display"></span> 
+          </span>
+        </div>
+      </div>
+      <p class="subscription-details-text"><strong>3-Pack,</strong> delivered every 3 months</p>
+      <div class="shipping-details-container"><p class="shipping-details-text">free shipping</p><p class="shipping-details-text">cancel anytime</p></div>
+    </label>
+    
+    {% comment %} =================================================================
+      3. OPCIÓN DE COMPRA ÚNICA (BUY ONCE)
+    ================================================================= {% endcomment %}
+    <label for="purchase-option-onetime" id="buy-once-option" class="purchase-option-label purchase-option-onetime {% unless default_autoship_exists %}is-selected{% endunless %}">
+      <div class="purchase-option-wrapper">
+        <div class="purchase-option-content">
+          <input
+            type="radio"
+            id="purchase-option-onetime"
+            name="purchase_option"
+            value="onetime"
+            data-selling-plan-id=""
+            data-pack-value=""
+            {% unless default_autoship_exists %}checked{% endunless %}
+          >
+          <span class="main-label">BUY ONCE</span>
+          <div class="price-once">
+          <span class="price-info" data-price-target="onetime">
+          <s class="compare-at-price-display"></s>
+          <span class="current-price-display">{{ current_variant.price | money_without_trailing_zeros }}</span>
+          </span>
+          <div class="shipping-price">+ $6.95 shipping</div>
+          </div>
+        </div>
+      </div>
+      
+      {% comment %} Selector de Packs para la compra única {% endcomment %}
+      {% if packs_option and packs_option_position > 0 %}
+        <div class="pack-selector-buttons" data-pack-selector>
+          {% for value in packs_option.values %}
+            {% assign value_handle = value | handleize %}
+            <button
+              type="button"
+              class="pack-button {% if value == '1-Pack' %}is-selected-pack{% endif %}"
+              data-pack-value="{{ value }}"
+              data-pack-position="{{ packs_option_position }}"
+              data-option-index="option{{ packs_option_position }}"
+            >
+              {{ value }}
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </label>
+    
+    <div class="total-save">
+      <div class="total-save-price">
+        <span class="total-current-price">
+        </span>
+        <s class="total-compare-price">
+        </s>
+      </div>
+      <div class="total-save-amount-container">
+        <span class="total-save-amount">
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* ESTILOS CLAVE */
+  .total-save{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+      font-size: 16px;
+    color: #523d33;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+
+  .offers-special-pdp .single-option-radio label .option-default{
+    padding: 10px 30px;
+  }
+
+  .offers-special-pdp{
+    gap: 10px !important;
+  }
+
+  .total-save-price{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  }
+
+  .total-save-price .total-current-price{
+  font-weight: bold;
+  }
+
+  .total-save-amount-container{
+  display: flex;
+align-items: center;
+gap: 10px;
+}
+
+  .total-save-amount-container .total-save-amount{
+    font-weight: bold;
+  }
+  .option-name-value-packs{
+    display: none;
+  }
+  .custom-subscription-widget-container { 
+    font-family: inherit; /* Usar la fuente del tema */
+    padding: 0 5px; /* Pequeño padding para móviles */
+    width: 100%;
+  }
+  .purchase-option-label {
+    display: block;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #fac8ca;
+    background-color: #fff;
+    opacity: .7;
+    width: 100%;
+  }
+
+  .subscription-options-list .purchase-option-label .price-info{
+    margin-left: auto;
+  }
+
+  .subscription-options-list .purchase-option-label .price-once{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .purchase-option-onetime .main-label{
+  font-weight: bold;
+
+  }
+
+  .subscription-options-list .purchase-option-label .price-info .current-price-display{
+    font-weight: bold;
+  }
+
+  .purchase-option-label.is-selected {
+    background-color: #fdedee;
+    opacity: 1;
+  }
+  .purchase-option-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .purchase-option-content input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin: 3px 0 0;
+    accent-color: #523d33;
+  }
+  .shipping-details-container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+
+  .subscription-details-text, .shipping-details-text {
+    font-size: 14px;
+    color: #523d33;
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+
+  #purchase-option-onetime .main-label{
+    font-weight: bold;
+  }
+
+  #buy-once-option .purchase-option-content{
+    align-items: flex-start;
+  }
+  
+  .best-deal-tag {
+    position: absolute;
+    top: -10px;
+    right: 80px;
+    background-color: #523d33;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  .pack-selector-buttons {
+    display: none; 
+    padding-top: 15px;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+  }
+  .purchase-option-onetime.is-selected .pack-selector-buttons {
+    display: flex; 
+  }
+  .pack-button {
+    padding: 2px 15px;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .pack-button.is-selected-pack {
+    background: #fac8ca; 
+    color: #523d33;
+    border-color: #fac8ca;
+    font-weight: bold !important;
+  }
+  .final-price-summary {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  .compare-at-price-display {
+    opacity: 0.7;
+    margin-left: 10px;
+    text-decoration: line-through;
+  }
+  .savings-display {
+    font-weight: normal;
+    font-size: 14px;
+    color: green;
+    margin-left: 10px;
+  }
+</style>
+

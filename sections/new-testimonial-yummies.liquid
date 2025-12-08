@@ -1,0 +1,94 @@
+<div data-f="product-testimonials-yumies.liquid " class="new-wrapper" data-aos="fade-up" data-section-id="{{ section.id }}" data-section-type="product-testimonials-nectar-section">
+    <h3 class="new-product-testimonials-title">{{ section.settings.new-product_testimonials_header }}</h3>
+    <div class="new-product-testimonials-text">{{ section.settings.new-product_testimonials_text }}</div>
+    <div class="new-product-testimonials-author">{{ section.settings.new-product_testimonials_author }}</div>
+</div>
+{% schema %}
+    {
+        "name":"New Testimonials Yummies",
+        "settings":[
+            {
+                "type":"text",
+                "id":"new-product_testimonials_header",
+                "label":"Section Header"
+            },
+            {
+                "type":"richtext",
+                "id":"new-product_testimonials_text",
+                "label":"Text"
+            },
+            {
+                "type":"text",
+                "id":"new-product_testimonials_author",
+                "label":"Author"
+            }
+        ],
+  "presets": [
+    {
+      "name": "New Testimonials Yummies"
+    }
+  ]
+    }
+{% endschema %}
+
+{% stylesheet %}
+
+  .new-wrapper{
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;    
+    padding-bottom: 60px;
+    display: none;
+  }
+
+  .new-product-testimonials-title:after {
+    content: url(/cdn/shop/files/quotation.png?v=1594324962);
+    color: #fac8ca;
+    font-size: 160px;
+    font-family: monospace;
+    text-align: center;
+    display: block;
+    height: 120px;
+    line-height: 1;
+    margin-top: -50px;
+  }
+
+  .new-product-testimonials-text {
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+    max-width: 470px;
+    margin: 60px auto 0;
+  }
+
+  .new-product-testimonials-author {
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    .new-wrapper{
+      display: block;
+    }
+  }
+  
+{% endstylesheet %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

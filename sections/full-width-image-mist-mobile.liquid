@@ -1,0 +1,139 @@
+<div data-f="full-width-image-mist-mobile.liquid" class="wrapper" data-aos="fade-up">
+    <h3 class="icons__heading">{{ section.settings.heading1 }} <span class="pink">{{ section.settings.heading2 }}</span> {{ section.settings.heading3 }}</h3>
+    {% case section.blocks.size %}
+        {% when 0 %}
+        {% when 1 %}
+            {% assign column_width = '' %}
+        {% when 2 %}
+            {% assign column_width = 'one-half' %}
+        {% when 3 %}
+            {% assign column_width = 'one-third' %}
+        {% when 4 %}
+            {% assign column_width = 'one-quarter' %}
+    {% endcase %}
+    <div class="grid">
+        {% for block in section.blocks %}
+            <div class="grid__item circle-mobile {{ column_width }} block-{{ block.id }}">
+                {% if block.settings.image != blank %}
+                    <noscript>
+                        {{ block.settings.image | img_url: '200x200' | img_tag: block.settings.image.alt, 'feature-row__image-no-js' }}
+                    </noscript>
+                    <div class="feature-icon__image-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100}}%;">
+                    {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                    <img class="feature-icon__image lazyload"
+                        src="{{ block.settings.image | img_url: '200x200' }}"
+                        data-src="{{ img_url }}"
+                        data-widths="[200, 360, 540, 720]"
+                        data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                        data-sizes="auto"
+                        alt="{{ block.settings.image.alt | escape }}">
+                </div>
+                {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+                <div class="icons__text">{{ block.settings.text }}</div>
+                <div class="icons__subtitle">{{ block.settings.subtitle }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<style>
+
+  .circle-mobile {
+    position: absolute;
+    -webkit-transition: all 2s linear;
+    -moz-transition: all 2s linear;
+    transition: all 2s linear;
+width: 22%;
+
+  }
+
+
+</style>
+
+<script>
+  (function() {
+    var nTimer = setInterval(function() {
+      if (window.$) {
+
+        var type = 1, //circle type - 1 whole, 0.5 half, 0.25 quarter
+          radius = '8em', //distance from center
+          start = -90, //shift start from 0
+          $elements = $('.circle-mobile:not(:first-child)'),
+          numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1, //adj for even distro of elements when not full circle
+          slice = 360 * type / numberOfElements;
+
+        $elements.each(function(i) {
+          var $self = $(this),
+            rotate = slice * i + start,
+            rotateReverse = rotate * -1;
+
+          $self.css({
+            'transform': 'rotate(' + rotate + 'deg) translate(' + radius + ') rotate(' + rotateReverse + 'deg)'
+          });
+        });
+
+
+
+        clearInterval(nTimer);
+      }
+    }, 100);
+  })();
+
+
+</script>
+{% schema %}
+{
+  "name": "Icons",
+  "class": "icons-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+        "type": "text",
+        "id": "heading1",
+        "label": "Heading 1"
+    },
+    {
+        "type": "text",
+        "id": "heading2",
+        "label": "Heading 2"
+    },
+    {
+        "type": "text",
+        "id": "heading3",
+        "label": "Heading 3"
+    }
+  ],
+  "presets": [
+    {
+        "name": "Icons",
+        "category": "Info"
+    }
+  ],
+  "blocks": [
+    {
+        "type": "info",
+        "name": "Icon",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Text"
+            },
+            {
+                "type": "text",
+                "id": "subtitle",
+                "label": "Subtitle"
+            }
+        ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+<div id="relatedblogs" class= "wrapper" data-aos="fade-up" data-section-id="{{ section.id }}">
+  <div class="row">
+  <h3 class="more-recipes">{{ section.settings.title }}</h3>
+   
+   
+    {% for block  in section.blocks %}
+            {% if block.type == "blog" %}
+   
+    <div class="rb_blog-grid">
+      
+      <a href="{{articles[block.settings.article].url }}">
+        <img src="{{articles[block.settings.article].image | img_url: 'master' }}" alt="Rose Water">
+      </a>
+      <h5 class="rb_title">
+      <a href="{{articles[block.settings.article].url }}">{{articles[block.settings.article].title }}</a>
+      </h5>
+   </div>
+             {% endif %}
+     {% endfor %}
+  </div>
+
+</div>
+  
+<style>
+  .rb_blog-grid{
+    float: left;
+    width: 32%;
+    margin-right: 2%;
+  }
+  #relatedblogs .rb_blog-grid:nth-of-type(3), #relatedblogs .rb_blog-grid:nth-of-type(6){margin-right:0px;}
+  #relatedblogs .rb_blog-grid:nth-of-type(4), #relatedblogs .rb_blog-grid:nth-of-type(7) { clear:left }
+    .rb_title a {
+    color: #333333;
+  }
+  .rb_title a:hover {
+    color: #333333;opacity: 1;
+  }
+  .rb_title{margin-top: 10px;}
+  .blog_meta {
+    color: #8c8b8b;
+    line-height: 1.6em;
+    font-size: 15px;
+  }.blog_meta span {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+    font-size: smaller;
+    color: #8c8b8b;
+  }.blog_meta span a {
+    color: #8c8b8b;
+  }.rb_contents {
+    line-height: 1.5;
+    margin: 1em 0;
+  }.rb_contents span {
+    font-size: 15px;
+    float: left;
+    text-align: left;
+  }
+  .rb_continue_button {
+    color: #333333;
+    border-color: #333333;
+    background-color: transparent;
+    border: 1px solid #333333;
+    transition: background-color 0.2s linear, color 0.2s linear;
+    margin: 25px 0;
+    padding: 0 20px;
+    text-align: center;
+    cursor: pointer;
+    min-height: 42px;
+    height: 40px;
+    line-height: 1.2;
+    vertical-align: top;
+    font-weight: bold;
+    font-size: 15px;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;text-transform: uppercase;
+    letter-spacing: 1px;
+  }.rb_continue_button:hover {
+    border-color: #333333;
+    background-color: #333333;
+    color: #fff;
+    opacity: 1;
+  }
+  
+  #relatedblogs{
+    height: auto;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 0;
+    border-top: 1px solid transparent;
+    padding-top: 0;
+    padding: 30px 0; 
+   }
+  .more-recipes{
+    top: 0; 
+    padding-bottom: 30px; 
+  }
+  
+  @media(max-width: 800px) {
+    .rb_blog-grid{
+      width:100%;
+  
+    }
+    .rb_blog-grid {
+    width: 48%;
+}
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Recommended Recipes",
+    "settings": [
+                {
+                    "type" : "text",
+                    "id" : "title",
+                    "label" : "Section title",
+                    "default" : "Recommended Recipes"
+                     
+                }
+      ],
+     "blocks": [
+            {
+              "type": "blog",
+              "name": "blog",
+               "settings":[
+                        {
+                          "type": "article",
+                           "id" : "article",
+                            "label" : "Select a blog post"
+                        }
+                   ]
+             }
+          ]
+  }
+{% endschema %}

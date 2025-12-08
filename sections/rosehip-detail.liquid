@@ -1,0 +1,255 @@
+{% schema %}
+{
+  "name": "Rosehip Detail",
+  "settings": [
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Left Title",
+      "default": "Bulgarian Rose"
+    },
+    {
+      "type": "color",
+      "id": "left_title_color",
+      "label": "Left Title Color",
+      "default": "#fac8ca"
+    },
+    {
+      "type": "range",
+      "id": "left_title_size",
+      "label": "Left Title Font Size (px)",
+      "min": 16,
+      "max": 48,
+      "default": 28,
+      "step": 1
+    },
+    {
+      "type": "select",
+      "id": "left_text_align",
+      "label": "Left Text Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "left_text",
+      "label": "Left Description",
+      "default": "Firmer, younger-looking skin\nSmooth, hydrated & radiant complexion\nReduced redness & even skin tone\nImproved texture"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center Bottle Image"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right Title",
+      "default": "Rosehip"
+    },
+    {
+      "type": "color",
+      "id": "right_title_color",
+      "label": "Right Title Color",
+      "default": "#523d33"
+    },
+    {
+      "type": "range",
+      "id": "right_title_size",
+      "label": "Right Title Font Size (px)",
+      "min": 16,
+      "max": 48,
+      "default": 28,
+      "step": 1
+    },
+    {
+      "type": "select",
+      "id": "right_text_align",
+      "label": "Right Text Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "right_text",
+      "label": "Right Description",
+      "default": "Faded dark spots & scars\nProtection from oxidative stress\nSkin regeneration & elasticity\nFirmer, healthier skin"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rosehip Detail",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% style %}
+.rosehip-detail {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px 0;
+  font-family: 'Montserrat', sans-serif;
+  flex-wrap: wrap;
+}
+
+.rosehip-col {
+  flex: 1;
+}
+
+.rosehip-r{
+  padding-left: 20px;
+}
+
+.rosehip-title {
+  margin-bottom: 10px;
+}
+
+.rosehip-text {
+  font-size: 18px;
+  color: #523d33;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.rosehip-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rosehip-l img {
+  width: 180px;
+  margin-top: 20px;
+}
+
+.rosehip-r img {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.rosehip-l {
+  padding-left: 20px;
+}
+
+@media screen and (min-width: 749px){
+  .rosehip-text{
+    white-space: pre-line;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .rosehip-detail {
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  .rosehip-col {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .rosehip-l {
+    order: 2;
+    padding-left: 0;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .rosehip-l .rosehip-text-wrapper{
+    position: relative;
+    z-index: 2;
+    margin-bottom: 60px;
+  }
+
+  .rosehip-l img{
+        position: absolute;
+        margin: 0;
+        width: 141px;
+        bottom: -40px;
+        right: 0;
+  }
+
+  .rosehip-center {
+    order: 1;
+  }
+
+  .rosehip-r {
+    order: 3;
+    display: flex;
+    padding-left: 0;
+  }
+
+  .rosehip-r img {
+    margin: 0 auto 20px;
+  }
+
+  .rosehip-l img {
+    margin: 20px auto 0;
+  }
+
+  .rosehip-text {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .rosehip-text{
+    white-space: pre-line;
+  }
+}
+{% endstyle %}
+
+
+<div class="rosehip-detail wrapper aos-init aos-animate" data-aos="fade-up" >
+  <div class="rosehip-col rosehip-l" style="text-align: {{ section.settings.left_text_align }};">
+    <div class="rosehip-text-wrapper">
+      <h3 class="rosehip-title" style="color: {{ section.settings.left_title_color }}; font-size: {{ section.settings.left_title_size }}px;">
+        {{ section.settings.left_title }}
+      </h3>
+      <div class="rosehip-text">{{ section.settings.left_text }}</div>
+    </div>
+    {% if section.settings.left_image %}
+      <img src="{{ section.settings.left_image | img_url: '300x' }}" class="rosehip-img" alt="Left Image" />
+    {% endif %}
+  </div>
+
+  <div class="rosehip-col rosehip-center">
+    {% if section.settings.center_image %}
+      <img src="{{ section.settings.center_image | img_url: '400x' }}" class="rosehip-img" alt="Bottle Image" />
+    {% endif %}
+  </div>
+
+  <div class="rosehip-col rosehip-r" style="text-align: {{ section.settings.right_text_align }};">
+    {% if section.settings.right_image %}
+      <img src="{{ section.settings.right_image | img_url: '300x' }}" class="rosehip-img" alt="Right Image" />
+    {% endif %}
+    <div class="rosehip-text-wrapper">
+      <h3 class="rosehip-title" style="color: {{ section.settings.right_title_color }}; font-size: {{ section.settings.right_title_size }}px;">
+        {{ section.settings.right_title }}
+      </h3>
+      <div class="rosehip-text">{{ section.settings.right_text }}</div>
+    </div>
+  </div>
+</div>
+

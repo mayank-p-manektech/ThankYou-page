@@ -1,0 +1,65 @@
+<div data-f="product-tabs-nectar.liquid " class="wrapper" data-aos="fade-up" data-section-id="{{ section.id }}" data-section-type="product-tabs-nectar-section">
+    <div class="grid product-tabs">
+        <div class="grid__item product-tabs-header large--hide">{{ section.settings.product_tabs_header }}</div>
+        <div class="grid__item large--two-fifths">
+            {% for block in section.blocks %}
+                <div class="tab-image-wrapper{% if forloop.index != 1 %} hide{% endif %}" data-tab="{{ forloop.index }}">
+                    <img src="{{ block.settings.tab_image | image_url }}">
+                </div>
+            {% endfor %}
+        </div>
+        <div class="grid__item large--three-fifths">
+            <h3 class="product-tabs-header medium--hide small--hide">{{ section.settings.product_tabs_header }}</h3>
+            <ul class="product-tabs-titles-wrapper">
+                {% for block in section.blocks %}
+                    <li class="tab-title{% if forloop.index == 1 %} active{% endif %}" data-tab="{{ forloop.index }}">
+                    {{ block.settings.tab_title }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="product-tabs-text-wrapper medium--text-center small—text-center">
+                {% for block in section.blocks %}
+                    <div class="tab-text{% if forloop.index != 1 %} hide{% endif %}" data-tab="{{ forloop.index }}">
+                        {{ block.settings.tab_text }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+    {
+        "name":"Product Tabs",
+        "max_blocks": 3,
+        "settings":[
+            {
+                "type":"text",
+                "id":"product_tabs_header",
+                "label":"Section Header"
+            }
+        ],
+        "blocks":[
+            {
+                "type":"info",
+                "name":"Tab",
+                "settings":[
+                    {
+                        "type":"text",
+                        "id":"tab_title",
+                        "label":"Tab Title"
+                    },
+                    {
+                        "type":"richtext",
+                        "id":"tab_text",
+                        "label":"Tab Text"                       
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"tab_image",
+                        "label":"Tab Image"                       
+                    }                   
+                ]
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,121 @@
+<div class="side_img aos-init" data-aos="fade-left"></div>
+<div class="left_side_img aos-init" data-aos="fade-right"></div>
+<div data-section-id="{{ section.id }}" data-section-type="featured-content-section" class="aos-init" data-aos="fade-up">
+  <div class="rich-text wrapper">
+    <div class="grid">
+      <div class="grid__item text-center{% unless section.settings.home_page_full_width %} large--two-thirds medium--two-thirds push--large--one-sixth push--medium--one-sixth{% endunless %}">
+        {% if section.settings.section_title != blank %}
+          <div class="section-header">
+            <h2 class="rich-text__heading--{{ section.settings.text_size }} section-header__title h1">{{ section.settings.section_title | escape }}</h2>
+          </div>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="rte rich-text__text--{{ section.settings.text_size }}">
+            {{ section.settings.text }}
+          </div>
+        {% endif %} 
+
+        {% if section.settings.text2 != blank %}
+          <div class="text_para2 rte rich-text__text--{{ section.settings.text_size }}">
+            {{ section.settings.text2 }}
+          </div>
+        {% endif %}  
+         
+          <div class="learn-more-super">           
+            <a href="{{ section.settings.link }}" class="learn-button">{{ section.settings.linktext }}</a>
+          </div>
+        
+      </div>
+    </div>
+   
+  </div>
+</div>
+
+<style type="text/css">
+  #shopify-section-{{ section.id }} .side_img {background-image:url('{{ section.settings.side_image | img_url:'master' }}');}
+  #shopify-section-{{ section.id }} .left_side_img {background-image:url('{{ section.settings.left_side_image | img_url:'master' }}');}
+</style>
+
+{% schema %}
+{
+  "name": "The Super Herb",
+  "class": "whats-inside-featured-content",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "home_page_full_width",
+      "label": "The Super Herb"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Main Super Herb Title",
+      "default": "The Super Herb"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Enter Text",
+      "default":"<p>Use this text to share information about your brand with your customers.</p>" 
+    },
+    {
+      "type": "richtext",
+      "id": "text2",
+      "label": "Enter Text",
+      "default":"<p>Use this text to share information about your brand with your customers.</p>" 
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Size",
+      "default": "medium",
+      "options": [
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        }
+      ]
+    },
+    
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_side_image",
+      "label": "Image"
+    },
+    {
+      "id": "link",
+      "type": "url",
+      "label": "Button link"
+    },
+    {
+      "id": "linktext",
+      "type": "text",
+      "label": "Button text",
+      "default": "Click Here"
+    }    
+  ],
+  
+      "presets": [
+    {
+     "name": "The Super Herb",
+     "category": "Text with image",
+     "settings": { 
+    
+          }
+      }
+    ]
+}
+{% endschema %}

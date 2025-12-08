@@ -1,0 +1,16 @@
+{% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+        <div class="radio-wrapper js product-form__item small--text-center option-name-{{ option.name | escape | handleize }}">
+            {% assign option_name = option.name | escape %}
+          {% if option_name contains 'Choose Servings' %}
+                {% include 'product-opt-choose-servings' %}
+            {% elsif option_name contains 'Choose Quantity' %}
+                {% include 'product-opt-choose-qty' %}
+            {% else %}
+              <div class="new-option">
+                {% include 'product-opt-default' %}
+              </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endunless %}

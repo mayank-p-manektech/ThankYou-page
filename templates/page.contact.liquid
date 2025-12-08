@@ -1,0 +1,31 @@
+<!-- /templates/page.contact.liquid -->
+      <div class="section-hero">
+        <img src="{{ 'contact-image.png' | asset_url }}" class="contact-img">
+        <div class="hero-content">
+          <h1 class="only-desktop">Become an Ambassador</h1>
+          <h1 class="only-mobile">Become an<br> Ambassador</h1>
+        </div>
+      </div>
+
+          {{ page.content }}
+
+
+<style>
+    .wholesale-wrapper{
+    max-width: 930px;
+    margin: 0 auto;
+    padding: 0 15px;
+    margin-bottom: 40px;
+  }
+</style>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        mainContent.style.display = 'block'; // O la propiedad de CSS que prefieras.
+    }
+});
+
+</script>

@@ -1,0 +1,37 @@
+<div class="newsletter" data-section-id="{{ section.id }}" data-section-type="newsletter-section">
+    <div class="wrapper">
+      {% unless section.settings.newsletter_heading == blank %}
+        <div class="section-header text-center">
+          <h2 class="h1 section-header__title">{{ section.settings.newsletter_heading | escape }}</h2>
+        </div>
+      {% endunless %}
+      {% unless section.settings.newsletter_subheading == blank %}
+        <div class="section-subheading rte text-center">
+          {{ section.settings.newsletter_subheading }}
+        </div>
+      {% endunless %}
+      {% form 'customer' %}
+        {{ form.errors | default_errors }}
+        {% if form.posted_successfully? %}
+          <div class="newsletter--form">
+            <div class="note form-success">{{ section.settings.newsletter_confirmstion }}</div>
+          </div>
+        {% else %}
+          <label for="Email" class="newsletter__label hidden-label">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter--form">
+            <div class="input-group">
+              <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="Email" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
+              <span class="input-group-btn">
+                <button id="newsletter-subscribe-{{section.id}}" type="submit"
+                  class="btn newsletter__submit"
+                  aria-label="{{ 'general.newsletter_form.submit' | t }}">
+                  <span class="newsletter__submit-text">{{ 'general.newsletter_form.submit' | t }}</span>
+                </button>
+              </span>
+            </div>
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>

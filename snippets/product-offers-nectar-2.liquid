@@ -1,0 +1,122 @@
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+    <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+  
+    {% capture "form_classes" %}
+      product-single__form{% if product.has_only_default_variant %} product-single__form--no-variants{% endif %}
+    {%- endcapture %}
+    {% capture "form_id" %}AddToCartForm--{{ section.id }}{%- endcapture %}
+  
+    {% form 'product', product, data-productid: product.id, class:form_classes, id: form_id, data-product-form: '' %}
+    
+      <input type="hidden" name="selling_plan" value="" id="SellingPlanInput-{{ section.id }}">
+    <div class="grid--flex product-offers offers-special-pdp">
+
+      <div class="product-price-wrapper">
+      {% include 'product-options-nectar' %}
+  
+      <select name="id" data-productid="{{ product.id }}" id="ProductSelect" class="product-single__variants no-js">
+        {% for variant in product.variants %}
+          {% if variant.available %}
+            <option {% if variant == product.selected_or_first_available_variant %}
+              selected="selected" {% endif %}
+              data-sku="{{ variant.sku }}"
+              value="{{ variant.id }}">
+              {{ variant.title }} - {{ variant.price | money_with_currency }}
+            </option>
+          {% else %}
+            <option disabled="disabled">
+              {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+            </option>
+          {% endif %}
+        {% endfor %}
+      </select>
+      </div>
+      <div class="one-half product-qty-wrapper">
+        {% if section.settings.quantity_enabled %}
+          <div class="product-single__quantity">
+            <label for="Quantity" class="product-single__quantity-label js-quantity-selector">
+              {{- 'products.product.quantity' | t -}}
+            </label>
+            <input
+              type="number"
+              hidden="hidden"
+              id="Quantity"
+              name="quantity"
+              value="1"
+              min="1"
+              class="js-quantity-selector"
+            >
+          </div>
+        {% endif %}
+
+        <!-- Begin Stay -->
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when '@app' %}
+              {% render block %}
+            {% when 'stay_ai_subscriptions' %}
+              {% render 'rtx-pdp-2', product: product, block: block, product_form_id: form_id %}
+          {% endcase %}
+        {% endfor %}
+        <!-- End Stay -->
+
+        <div class="money-saved">
+          <div class="money-saved-percentage">          
+            <span class="current-price"></span>
+            <span class="original-price-tachado" style="text-decoration: line-through;"></span>
+            <span class="savings-percent"></span>
+          </div>
+          <div class="money-saved-amount-container">
+            Save
+            <b class="money-saved-amount"></b>
+          </div>
+        </div>
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'price' %}
+              {% include 'product-price', variant: current_variant %}
+            {% when 'price-per-unit' %}
+              {% include 'product-price-info-nectar' %}
+          {% endcase %}
+        {% endfor %}
+        <div class="product-single__add-to-cart{% if section.settings.add_to_cart_button_size == 'large' %} product-single__add-to-cart--full-width{% endif %} {% unless current_variant.available %} atc-sold-out{% endunless %}">
+          <button
+            style="visibility: visible;"
+            type="submit"
+            name="add"
+            id="AddToCart--{{ section.id }}"
+            class="btn btn--add-to-cart{% if section.settings.enable_payment_button %} btn--secondary-accent{% endif %} {% unless current_variant.available %}disabled{% endunless %}"
+            {% unless current_variant.available %}
+              disabled="disabled"
+            {% endunless %}
+          >
+            <span class="btn__text">
+              {% if current_variant.available %}
+                {% comment %} {{ 'products.product.add_to_cart' | t }} {% endcomment %}
+                Add to cart
+              {% else %}
+                Out of Stock
+              {% endif %}
+            </span>
+          </button>
+          {% if section.settings.enable_payment_button %}
+            {{ form | payment_button }}
+          {% endif %}
+        </div>
+      </div>    
+     <!-- <div class="product-image-info-wrapper dev-hide-desktop">
+       
+      <div class="image-info-star"><span class="spr-starrating spr-badge-starrating"><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i><i class="spr-icon spr-icon-star" style="color: #fac8ca;"></i></span></div>
+     
+       <div class="image-info"> Best thing I have ever used for anxiety. I have no idea how I ever lived without Rose Nectarr.</div>
+      <div class="author">- Natalie</div>
+             
+     </div> -->
+    </div>
+    {% endform %}
+
+    <script>
+      const atcForm = "AddToCartForm--{{ section.id }}"
+    </script>
+  </div>

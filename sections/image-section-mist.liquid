@@ -1,0 +1,104 @@
+<div id="shopify-section-image-section-mist" class="icons-section new-icons-section">
+  <div data-f="image-section-mist.liquid" class="wrapper" data-aos="fade-up">
+     <div class= "Pure_Rose_Mist_img">
+   
+      <img src= '{{ "Pure_Rose_Mist.jpeg" | asset_url }}'/>
+        
+      </div>
+   
+    {% case section.blocks.size %}
+        {% when 0 %}
+        {% when 1 %}
+            {% assign column_width = '' %}
+        {% when 2 %}
+            {% assign column_width = 'one-half' %}
+        {% when 3 %}
+            {% assign column_width = 'one-third' %}
+        {% when 4 %}
+            {% assign column_width = 'one-quarter' %}
+    {% endcase %}
+    <div class="grid">
+       <h3 class="icons__heading"><span class="pink">{{ section.settings.heading1 }}</span> {{ section.settings.heading2 }} {{ section.settings.heading3 }}</h3>
+        {% for block in section.blocks %}
+            <div class="grid__item {{ column_width }}">
+                <div class="icons__text">{{ block.settings.text }}</div>
+          
+                {% if block.settings.image != blank %}
+                    <noscript>
+                        {{ block.settings.image | img_url: '2000x2000' | img_tag: block.settings.image.alt, 'feature-row__image-no-js' }}
+                    </noscript>
+                    <div class="feature-icon__image-wrapper" style="padding-top:{{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100}}%;">
+                    {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                    <img class="feature-icon__image lazyload"
+                        src="{{ block.settings.image | img_url: '2000x2000' }}"
+                        data-src="{{ img_url }}"
+                        data-widths="[200, 360, 540, 720]"
+                        data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                        data-sizes="auto"
+                        alt="{{ block.settings.image.alt | escape }}">
+                </div>
+                {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              
+              
+            </div>
+        {% endfor %}
+    
+    </div>
+</div>
+</div>
+{% schema %}
+{
+  "name": "Icons",
+  "class": "icons-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+        "type": "text",
+        "id": "heading1",
+        "label": "Heading 1"
+    },
+    {
+        "type": "text",
+        "id": "heading2",
+        "label": "Heading 2"
+    }
+  ],
+  "presets": [
+    {
+        "name": "Icons",
+        "category": "Info"
+    }
+  ],
+  "blocks": [
+    {
+        "type": "info",
+        "name": "Icon",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "textarea",
+                "id": "text",
+                "label": "Text"
+            }
+        ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+
+  #shopify-section-template--18181175935195__image_section_mist_jNcyJY.icons-section{
+    padding: 0;
+  }
+
+  @media only screen and (max-width: 767px) {
+}
+  
+{% endstylesheet %}

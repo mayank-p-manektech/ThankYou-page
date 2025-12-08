@@ -1,0 +1,74 @@
+<div data-f="product-video-nectar.liquid " class="wrapper">
+    <div class="product-video" data-onvideoend="onVideoEnd">
+        {% for block in section.blocks %}
+            <div class="video-thumb-wrapper">
+                <a href="https://player.vimeo.com/video/{{ block.settings.video_url.id }}" class="html5lightbox video-link" data-video-index="{{ forloop.index }}" data-autoplayvideo="true" data-group="mygroup" data-thumbnail="" data-autoslide="true" data-fullscreenmode="true" title="Rose">
+                    <div class="video-image-wrapper">
+                        <img class="video-thumb" src="{{ block.settings.video_image | img_url: '600x' }}" data-video-index="{{ forloop.index }}">
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        
+        $('.product-video').slick({
+            dots: false,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    });
+</script>
+
+{% schema %}
+    {
+        "name":"Product Video",
+        "class":"product-video-section",
+        "max_blocks": 10,
+        "blocks":[
+            {
+                "type":"video",
+                "name":"Video",
+                "settings":[
+                    {
+                        "type": "video_url",
+                        "id": "video_url", 
+                        "label": "Video Link",
+                        "accept": [
+                            "youtube",
+                            "vimeo"
+                        ]
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "video_image", 
+                        "label": "Video Image"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}
