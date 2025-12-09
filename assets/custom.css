@@ -350,3 +350,11 @@ justify-content: center;
     max-width: 320px;
   }
 }
+.shopify-section.social-ocean-top-customers-widget button.w-full.rounded-xl.bg-gray-100.py-3.font-medium.text-gray-700.transition-colors.hover\:bg-gray-200 {
+  background: #fdedee  !important;
+  color: rgb(55 65 81);
+}
+.shopify-section.social-ocean-top-customers-widget button.text-sm.font-normal.underline.transition-colors {
+  text-transform: capitalize;
+}
+
