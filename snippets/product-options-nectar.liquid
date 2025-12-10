@@ -13,8 +13,8 @@
     {% endfor %}
 {% endunless %}
 
-
-<script>
+{% comment %} Old code {% endcomment %}
+{% comment %} <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Display 32 Servings 8oz option as default
     const label = document.querySelector('.option-name-choose-servings label[data-option="64 servings | 16oz"]');
@@ -29,4 +29,24 @@
     }
   });
 
+</script> {% endcomment %}
+
+
+{% comment %} new updated Code {% endcomment %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+
+    const label = document.querySelector(
+      '.option-name-choose-servings label[data-option="32 servings | 8oz"]'
+    );
+
+    if (label) {
+      label.click();
+    }
+
+    const offers = document.querySelector('#rose-nectar .product-offers');
+    if (offers) {
+      offers.style.opacity = '1';
+    }
+  });
 </script>
